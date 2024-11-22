@@ -47,9 +47,9 @@
             [configProperties]="cardConfig.bodyText35ConfigProperties">
           </body-text>
           <div class="button-container">
-            <button-component
+            <button-component data-toggle="modal" data-target="#addsectionmodel"
               [configProperties]="cardConfig.button91ConfigProperties"
-              (submitForm)="button91submitForm()">
+              (submitForm)="button91submitForm(cardConfig.subtitleText61ConfigProperties.value)">
             </button-component>
             <button-component
               [configProperties]="cardConfig.button93ConfigProperties"
@@ -58,6 +58,20 @@
           </div>
         </ng-template>
       </card>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addsectionmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <add-section *ngIf="selectedExamId" [examId]="selectedExamId"></add-section>
+      </div>
     </div>
   </div>
 </div>

@@ -27,6 +27,7 @@ import { CheckBoxComponent } from './shared/components/check-box/check-box.compo
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AddSectionComponent } from './Admin/add-section/add-section.component';
 
 
 
@@ -45,14 +46,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CardComponent,
     SubtitleTextComponent,
     BodyTextComponent,
-
     AddExamComponent,
     TextareaComponent,
     DatepickerInputComponent,
     NumberInputComponent,
     CheckBoxComponent,
-
-
     AppComponent,
     AddExamComponent,
     TitleH3TextComponent,
@@ -62,6 +60,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NumberInputComponent,
     CheckBoxComponent,
     ButtonComponent,
+    AddSectionComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, CommonModule, NgSelectModule, HttpClientModule, ProjectionTemplate,
     BsDatepickerModule.forRoot(),

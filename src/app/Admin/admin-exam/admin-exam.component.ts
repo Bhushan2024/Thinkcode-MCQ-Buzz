@@ -17,6 +17,8 @@ export class AdminExamComponent implements OnInit {
   public button91ConfigProperties: any;
   public button92ConfigProperties: any;
   public button93ConfigProperties: any;
+  public selectedExamId: any = '';
+  
 
   public exams: any[] = []; // Stores fetched exams
   public teacherId: string | null = null; // Current teacher ID
@@ -336,7 +338,7 @@ export class AdminExamComponent implements OnInit {
         propertyName: `edit_${exam.id}`,
         showLabel: false,
         type: 'button',
-        formControlName: `buttonEdit_${exam.id}`,
+        formControlName: `${exam.id}`,
         btnText: 'Add Section',
         btnType: 'button',
         customCssClasses: [],
@@ -361,15 +363,22 @@ export class AdminExamComponent implements OnInit {
     }));
   }
 
-  /**
-   * Event handlers for buttons and cards.
-   */
   card51Clicked(): void {
     console.log('Card clicked.');
   }
 
-  button91submitForm(): void {
-    console.log('Edit button clicked.');
+  button91submitForm(examId: string): void {
+    console.log("Selected Exam Id"+examId)
+    const matchedExam = this.exams.find((exam) => exam.title === examId);
+    console.log("matchedExam"+matchedExam)
+
+  if (matchedExam) {
+    const ID = matchedExam.examId; 
+    console.log(`Exam ID for "${examId}":`, ID);
+    this.selectedExamId = ID;
+  } else {
+    console.error(`No exam found with the title "${examId}"`);
+  }
   }
 
   button92submitForm(): void {
@@ -377,6 +386,7 @@ export class AdminExamComponent implements OnInit {
   }
   button93submitForm(): void {
     console.log('Add Exam button clicked.');
+    
   }
   
 }
