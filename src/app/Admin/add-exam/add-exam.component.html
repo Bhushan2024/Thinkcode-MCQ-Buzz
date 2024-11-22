@@ -1,0 +1,51 @@
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row">
+    <div class="col-lg-12 color-black">
+      <title-h3-text [configProperties]="titleH3Text31ConfigProperties"></title-h3-text
+      ><text-input
+        [configProperties]="text41ConfigProperties"
+        [formValidation]="text41FormValidation"
+        (configPropertiesChanged)="text41Changed($event)"></text-input
+      ><text-area
+        [configProperties]="textArea1ConfigProperties"
+        [formValidation]="textArea1FormValidation"
+        (configPropertiesChanged)="textArea1Changed($event)"></text-area
+      ><date-picker
+        [configProperties]="datePicker1ConfigProperties"
+        [formValidation]="datePicker1FormValidation"
+        (configPropertiesChanged)="datePicker1Changed($event)"></date-picker
+      ><date-picker
+        [configProperties]="datePicker12ConfigProperties"
+        [formValidation]="datePicker12FormValidation"
+        (configPropertiesChanged)="datePicker12Changed($event)"></date-picker
+      ><number-input
+        [configProperties]="number1ConfigProperties"
+        [formValidation]="number1FormValidation"
+        (configPropertiesChanged)="number1Changed($event)"></number-input
+      ><number-input
+        [configProperties]="number12ConfigProperties"
+        [formValidation]="number12FormValidation"
+        (configPropertiesChanged)="number12Changed($event)"></number-input
+      ><number-input
+        [configProperties]="number23ConfigProperties"
+        [formValidation]="number23FormValidation"
+        (configPropertiesChanged)="number23Changed($event)"></number-input
+      ><number-input
+        [configProperties]="number34ConfigProperties"
+        [formValidation]="number34FormValidation"
+        (configPropertiesChanged)="number34Changed($event)"></number-input
+      ><check-box
+        [configProperties]="checkBox1ConfigProperties"
+        [formValidation]="checkBox1FormValidation"
+        (configPropertiesChanged)="checkBox1Changed($event)"></check-box
+      ><check-box
+        [configProperties]="checkBox12ConfigProperties"
+        [formValidation]="checkBox12FormValidation"
+        (configPropertiesChanged)="checkBox12Changed($event)"></check-box
+      ><button-component
+        [configProperties]="button113ConfigProperties"
+        (submitForm)="button113submitForm()"></button-component>
+    </div>
+  </div>
+</div>

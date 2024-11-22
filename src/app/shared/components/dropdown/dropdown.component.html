@@ -1,0 +1,74 @@
+<div
+  [ngClass]="[
+    configProperties.styles.dropdownComponentStyle
+      ? configProperties.styles.dropdownComponentStyle
+      : '',
+  ]"
+  [hidden]="configProperties.isHidden">
+  <!-- Label for fields -->
+  <label
+    *ngIf="configProperties.showLabel"
+    [for]="configProperties.formControlName"
+    [style.color]="
+      form.controls[configProperties.formControlName].invalid &&
+      form.controls[configProperties.formControlName].touched
+        ? '#DA2D20 !important'
+        : ''
+    "
+    [ngClass]="[configProperties.styles.labelStyle ? configProperties.styles.labelStyle : '']">
+    {{ configProperties.displayName || 'Label' }}
+    <span class="ml-1 text-danger" *ngIf="isMandatory()">*</span>
+  </label>
+  <div [formGroup]="form" #ngSelectWrapper>
+    <ng-select
+      [placeholder]="configProperties.placeHolder || 'Select an option'"
+      [readonly]="isReadOnly()"
+      [clearable]="false"
+      [formControlName]="configProperties.formControlName"
+      (click)="onDropdownChanged()"
+      (change)="onDropdownChanged()"
+      [ngClass]="[
+        form.controls[configProperties.formControlName].invalid &&
+        form.controls[configProperties.formControlName].touched
+          ? 'validation-error-wrapper'
+          : '',
+      ]"
+      [(ngModel)]="defaultDropDownValue"
+      [searchable]="false"
+      [items]="configProperties.listOfOptions"
+      bindLabel="{{ configProperties.dropDisplayName || 'displayName' }}"
+      bindValue="{{ configProperties.dropValue || 'value' }}"
+      [searchable]="false">
+      <ng-template ng-option-tmp let-item="item" let-index="index">
+        <div
+          class="dropdown-custom-options"
+          [ngClass]="[
+            configProperties.styles.optionsStyle ? configProperties.styles.optionsStyle : '',
+          ]">
+          {{ item.displayName }}
+        </div>
+      </ng-template>
+    </ng-select>
+
+    <div *ngIf="configProperties.helpText">
+      <small
+        [ngClass]="[
+          configProperties.styles.supportingTextStyle
+            ? configProperties.styles.supportingTextStyle
+            : '',
+        ]">
+        {{ configProperties.helpText }}
+      </small>
+    </div>
+    <!-- Validation error texts -->
+    <div
+      *ngIf="
+        form.controls[configProperties.formControlName]?.invalid &&
+        form.controls[configProperties.formControlName]?.touched
+      ">
+      <ng-container *ngIf="form.controls[configProperties.formControlName].errors?.['required']">
+        <p class="invalid-input-text">Please enter value</p>
+      </ng-container>
+    </div>
+  </div>
+</div>

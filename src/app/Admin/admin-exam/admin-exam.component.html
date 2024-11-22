@@ -1,0 +1,63 @@
+<br>
+<button-component data-toggle="modal" data-target="#exampleModalCenter"
+  [configProperties]="button92ConfigProperties"
+  (submitForm)="button92submitForm()"
+></button-component>
+<br>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <add-exam></add-exam>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row">
+    <div *ngFor="let cardConfig of cardsConfigProperties" class="col-lg-4 color-black">
+      <card
+        [configProperties]="cardConfig.card51ConfigProperties"
+        (cardClickedEvent)="card51Clicked()">
+        <ng-template pTemplate="content">
+          <subtitle-text
+            [configProperties]="cardConfig.subtitleText61ConfigProperties">
+          </subtitle-text>
+          <body-text
+            [configProperties]="cardConfig.bodyText31ConfigProperties">
+          </body-text>
+          <body-text
+            [configProperties]="cardConfig.bodyText32ConfigProperties">
+          </body-text>
+          <body-text
+            [configProperties]="cardConfig.bodyText33ConfigProperties">
+          </body-text>
+          <body-text
+            [configProperties]="cardConfig.bodyText34ConfigProperties">
+          </body-text>
+          <body-text
+            [configProperties]="cardConfig.bodyText35ConfigProperties">
+          </body-text>
+          <div class="button-container">
+            <button-component
+              [configProperties]="cardConfig.button91ConfigProperties"
+              (submitForm)="button91submitForm()">
+            </button-component>
+            <button-component
+              [configProperties]="cardConfig.button93ConfigProperties"
+              (submitForm)="button93submitForm()">
+            </button-component>
+          </div>
+        </ng-template>
+      </card>
+    </div>
+  </div>
+</div>
