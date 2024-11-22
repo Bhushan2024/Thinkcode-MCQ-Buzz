@@ -8,7 +8,15 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   private baseUrl = environment.baseUrl;
-  constructor(private http: HttpClient) {}
+  private token: string | null = null;
+
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('authToken');
+  }
+
+  get isLoggedIn(): boolean {
+    return this.token !== null;
+  }
 
   private buildUrl(endpoint: string): string {
     return `${this.baseUrl}/${endpoint}`;
@@ -36,5 +44,10 @@ export class AuthService {
   get<T>(endpoint: string): Observable<T> {
     const url = this.buildUrl(endpoint);
     return this.http.get<T>(url, { headers: this.getHeaders() });
+  }
+  // Add a method to retrieve the logged-in user details from localStorage
+  getLoggedInUser(): any | null {
+    const userJson = localStorage.getItem('currentExamUser');
+    return userJson ? JSON.parse(userJson) : null;
   }
 }
