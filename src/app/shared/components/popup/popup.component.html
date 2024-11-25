@@ -1,0 +1,29 @@
+<div
+  [ngClass]="[configProperties.styles.popupStyle ? configProperties.styles.popupStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <div
+    class="modal-header header-border-bottom"
+    [ngClass]="[
+      configProperties.styles.popupHeaderStyle ? configProperties.styles.popupHeaderStyle : '',
+    ]"
+    *ngIf="configProperties.modalTitle">
+    <h4
+      [ngClass]="[
+        configProperties.styles.headingTextStyle ? configProperties.styles.headingTextStyle : '',
+      ]">
+      {{ configProperties.modalTitle }}
+    </h4>
+    <fa-icon
+      (click)="closeModal()"
+      [ngClass]="[configProperties.styles.iconStyle ? configProperties.styles.iconStyle : '']"
+      [icon]="faTimes">
+    </fa-icon>
+  </div>
+  <div
+    class="modal-body"
+    [ngClass]="[
+      configProperties.styles.popupBodyStyle ? configProperties.styles.popupBodyStyle : '',
+    ]">
+    <ng-template [ngTemplateOutlet]="dynamicContent"></ng-template>
+  </div>
+</div>

@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
         if (response.role === 'Student') {
           this.router.navigate(['/user-dashboard']);
         } else if (response.role === 'Teacher') {
-          this.router.navigate(['/teacher-dashboard']);
+          this.router.navigate(['/admin-exam']);
         } else {
           alert('Unrecognized role. Contact support.');
         }

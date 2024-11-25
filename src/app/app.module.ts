@@ -28,6 +28,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AddSectionComponent } from './Admin/add-section/add-section.component';
+import { AdminSectionComponent } from './Admin/admin-section/admin-section.component';
+import { PopupComponent } from './shared/components/popup/popup.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { InitialNavbarComponent } from './shared/initial-navbar/initial-navbar/initial-navbar.component';
 
 
 
@@ -60,13 +64,17 @@ import { AddSectionComponent } from './Admin/add-section/add-section.component';
     NumberInputComponent,
     CheckBoxComponent,
     ButtonComponent,
-    AddSectionComponent
+    AddSectionComponent,
+    AdminSectionComponent,
+    PopupComponent,
+    InitialNavbarComponent,
+  
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, CommonModule, NgSelectModule, HttpClientModule, ProjectionTemplate,
     BsDatepickerModule.forRoot(),
     FontAwesomeModule,
     BrowserAnimationsModule,],
-  providers: [],
+  providers: [BsModalService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

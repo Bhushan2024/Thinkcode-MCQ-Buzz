@@ -244,7 +244,7 @@ export class AddSectionComponent implements OnInit {
     this.text72ConfigProperties = event;
   }
   number41Changed(event: any) {
-    this.text72ConfigProperties = event;
+    this.number41ConfigProperties = event;
   }
   number52Changed(event: any) {
     this.number52ConfigProperties = event;
@@ -259,7 +259,7 @@ export class AddSectionComponent implements OnInit {
     const payload = {
       examId:this.examId,
       title: this.text72ConfigProperties.value,
-      totalQuestions:this.text72ConfigProperties.value,
+      totalQuestions:this.number41ConfigProperties.value,
       totalMarks: this.number52ConfigProperties.value,
       passingMarks: this.number63ConfigProperties.value,
       weightagePercentage:this.number74ConfigProperties.value,

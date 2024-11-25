@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamService } from 'src/app/Service/exam.service'; // Custom service for exam-related operations
+import { ExamService } from 'src/app/Service/exam.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'admin-exam',
@@ -18,13 +20,13 @@ export class AdminExamComponent implements OnInit {
   public button92ConfigProperties: any;
   public button93ConfigProperties: any;
   public selectedExamId: any = '';
-  
+
 
   public exams: any[] = []; // Stores fetched exams
   public teacherId: string | null = null; // Current teacher ID
   public cardsConfigProperties: any[] = []; // Dynamic card configurations
 
-  constructor(private examService: ExamService) {}
+  constructor(private examService: ExamService, private router: Router) { }
 
   ngOnInit(): void {
     this.teacherId = localStorage.getItem('currentUserId'); // Get teacher ID from localStorage
@@ -278,7 +280,7 @@ export class AdminExamComponent implements OnInit {
         propertyName: `bodyText_${exam.id}`,
         showLabel: false,
         type: 'body-text',
-        value:`Start Date: ${exam.startDate}`,
+        value: `Start Date: ${exam.startDate}`,
         formControlName: `bodyText_${exam.id}`,
         customCssClasses: [],
         icon: 'faBold',
@@ -293,7 +295,7 @@ export class AdminExamComponent implements OnInit {
         propertyName: `bodyText_${exam.id}`,
         showLabel: false,
         type: 'body-text',
-        value:`End Date: ${exam.endDate}`,
+        value: `End Date: ${exam.endDate}`,
         formControlName: `bodyText_${exam.id}`,
         customCssClasses: [],
         icon: 'faBold',
@@ -308,7 +310,7 @@ export class AdminExamComponent implements OnInit {
         propertyName: `bodyText_${exam.id}`,
         showLabel: false,
         type: 'body-text',
-        value:`Duration: ${exam.duration} min.`,
+        value: `Duration: ${exam.duration} min.`,
         formControlName: `bodyText_${exam.id}`,
         customCssClasses: [],
         icon: 'faBold',
@@ -368,25 +370,39 @@ export class AdminExamComponent implements OnInit {
   }
 
   button91submitForm(examId: string): void {
-    console.log("Selected Exam Id"+examId)
+    console.log("Selected Exam Id" + examId)
     const matchedExam = this.exams.find((exam) => exam.title === examId);
-    console.log("matchedExam"+matchedExam)
+    console.log("matchedExam" + matchedExam)
 
-  if (matchedExam) {
-    const ID = matchedExam.examId; 
-    console.log(`Exam ID for "${examId}":`, ID);
-    this.selectedExamId = ID;
-  } else {
-    console.error(`No exam found with the title "${examId}"`);
-  }
+    if (matchedExam) {
+      const ID = matchedExam.examId;
+      console.log(`Exam ID for "${examId}":`, ID);
+      this.selectedExamId = ID;
+    } else {
+      console.error(`No exam found with the title "${examId}"`);
+    }
   }
 
   button92submitForm(): void {
     console.log('Add Exam button clicked.');
   }
-  button93submitForm(): void {
-    console.log('Add Exam button clicked.');
-    
+  button93submitForm(examId: string): void {
+    console.log("Selected Exam Id" + examId)
+    const matchedExam = this.exams.find((exam) => exam.title === examId);
+    console.log("matchedExam" + matchedExam)
+
+    if (matchedExam) {
+      const ID = matchedExam.examId;
+      console.log(`Exam ID for "${examId}":`, ID);
+      this.selectedExamId = ID;
+      // this.router.navigate(['/user-dashboard']);
+      //this.router.navigate(['/admin-section'], { queryParams: { examId: this.selectedExamId } });
+      this.router.navigate(['/admin-section', ID]);
+
+    } else {
+      console.error(`No exam found with the title "${examId}"`);
+    }
+
   }
-  
+
 }

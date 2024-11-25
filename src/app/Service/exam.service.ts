@@ -36,5 +36,9 @@ export class ExamService {
     const url = this.buildUrl('v1/Section/AddSection');
     return this.http.post(url, JSON.stringify(Examdata), { headers: this.getHeaders() });
   }
+  getSectionsByExamId(ExamId: number): Observable<any> {
+    const url = `${this.buildUrl('v1/Section/getSectionsByExamId')}?ExamId=${ExamId}`;
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
   
 }
