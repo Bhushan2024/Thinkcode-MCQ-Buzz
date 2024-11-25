@@ -12,7 +12,7 @@ import { PasswordInputComponent } from './shared/components/password-input/passw
 import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonComponent } from './shared/components/button-component/button-component.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AdminExamComponent } from './Admin/admin-exam/admin-exam.component';
 import { CardComponent } from './shared/components 1/card/card.component';
@@ -32,8 +32,7 @@ import { AdminSectionComponent } from './Admin/admin-section/admin-section.compo
 import { PopupComponent } from './shared/components/popup/popup.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { InitialNavbarComponent } from './shared/initial-navbar/initial-navbar/initial-navbar.component';
-
-
+import { AuthInterceptor } from './interceptor/exam.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,13 +67,27 @@ import { InitialNavbarComponent } from './shared/initial-navbar/initial-navbar/i
     AdminSectionComponent,
     PopupComponent,
     InitialNavbarComponent,
-  
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, CommonModule, NgSelectModule, HttpClientModule, ProjectionTemplate,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    CommonModule,
+    NgSelectModule,
+    HttpClientModule,
+    ProjectionTemplate,
     BsDatepickerModule.forRoot(),
     FontAwesomeModule,
-    BrowserAnimationsModule,],
-  providers: [BsModalService],
+    BrowserAnimationsModule,
+  ],
+  providers: [
+    BsModalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true, // Allows multiple interceptors if needed
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

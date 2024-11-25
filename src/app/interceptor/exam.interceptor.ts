@@ -4,22 +4,19 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
+  HttpRequest,
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { error } from 'console';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   constructor(private router: Router) {}
 
-   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('authToken');
-    
-    if (token) {
 
+    if (token) {
       const cloned = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
       });
@@ -41,12 +38,11 @@ export class AuthInterceptor implements HttpInterceptor {
           }
 
           return throwError(() => new Error(error.message));
-        })
+        }),
       );
     } else {
       return next.handle(req).pipe(
         catchError((error: HttpErrorResponse) => {
-
           console.log('Error caught in interceptor:', error);
 
           if (error.status === 401) {
@@ -55,9 +51,9 @@ export class AuthInterceptor implements HttpInterceptor {
           } else if (error.status === 0) {
             console.error('CORS or Network Error:', error);
           }
-          
+
           return throwError(() => new Error(error.message));
-        })
+        }),
       );
     }
   }

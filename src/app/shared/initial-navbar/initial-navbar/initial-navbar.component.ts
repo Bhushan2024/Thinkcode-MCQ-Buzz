@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { AuthService } from 'src/app/Service/auth.service';
 
 @Component({
   selector: 'initial-navbar',
@@ -11,8 +13,14 @@ export class InitialNavbarComponent implements OnInit {
   public subtitleText33ConfigProperties: any;
   public button1ConfigProperties: any;
   public button12ConfigProperties: any;
+  public button123ConfigProperties: any;
 
-  constructor() {}
+  isLoggedIn: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     this.titleH3Text12ConfigProperties = {
@@ -131,10 +139,42 @@ export class InitialNavbarComponent implements OnInit {
       variableName: 'button12ConfigProperties',
       listOfOptions: [],
     };
+    this.button123ConfigProperties = {
+      helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        buttonStyle:
+          'border-radius-05rem border-width-1 font-size-11rem font-weight-600 color-000000',
+      },
+      isHidden: false,
+      propertyName: '7733989b-f633-42bf-a8d9-ac5fa707f6e4',
+      showLabel: false,
+      type: 'button',
+      formControlName: 'button12FormControl',
+      btnText: 'Logout',
+      btnType: 'button',
+      navigateTo: '',
+      staticFn: [],
+      customCssClasses: [],
+      childs: [],
+      icon: 'faRectangleLandscape',
+      listChilds: [],
+      styleType: '',
+      variableName: 'button123ConfigProperties',
+      listOfOptions: [],
+    };
   }
 
   button1submitForm() {
-    
+    this.router.navigate(['login']);
+    this.isLoggedIn = true;
   }
-  button12submitForm() {}
+  button12submitForm() {
+    this.router.navigate(['register']);
+  }
+  button123submitForm() {
+    this.isLoggedIn = false;
+    this.router.navigate(['login']);
+  }
 }

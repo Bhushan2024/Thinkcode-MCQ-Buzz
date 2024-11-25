@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Service/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../Service/toast.service';
 
 @Component({
   selector: 'login',
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit {
   public password1FormValidation: any;
   public button1ConfigProperties: any;
 
-  constructor(private AuthService: AuthService, private router: Router) {}
+  constructor(
+    private AuthService: AuthService,
+    private toastService: ToastService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.titleH3Text1ConfigProperties = {
@@ -119,7 +124,7 @@ export class LoginComponent implements OnInit {
       showLabel: false,
       type: 'button',
       formControlName: 'button1FormControl',
-      btnText: 'Register',
+      btnText: 'Login',
       btnType: 'submit',
       navigateTo: '',
       staticFn: [],
@@ -139,7 +144,7 @@ export class LoginComponent implements OnInit {
   password1Changed(event: any) {
     this.password1ConfigProperties = event;
   }
-  
+
   button1submitForm() {
     const payload = {
       email: this.email1ConfigProperties.value,
@@ -162,12 +167,12 @@ export class LoginComponent implements OnInit {
           alert('Unrecognized role. Contact support.');
         }
 
-        console.log('Login successful:', response);
+        this.toastService.showSuccess('Login Successfully');
       },
       (error) => {
         alert('Error while logging in');
         console.error('Error:', error);
-      }
+      },
     );
   }
 }

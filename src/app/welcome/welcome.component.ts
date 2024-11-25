@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Service/auth.service';
+import { Router } from '@angular/router';
+import { ToastService } from '../Service/toast.service';
 
 @Component({
   selector: 'welcome',
@@ -22,7 +24,11 @@ export class WelcomeComponent implements OnInit {
   public dropdowns1FormValidation: any;
   public button1ConfigProperties: any;
 
-  constructor(private AuthService: AuthService) {}
+  constructor(
+    private AuthService: AuthService,
+    private toastService: ToastService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.titleH3Text1ConfigProperties = {
@@ -297,26 +303,25 @@ export class WelcomeComponent implements OnInit {
     this.dropdowns1ConfigProperties = event;
   }
   button1submitForm() {
-
     const payload = {
       firstname: this.text12ConfigProperties.value,
-      lastname:this.text23ConfigProperties.value,
+      lastname: this.text23ConfigProperties.value,
       email: this.email1ConfigProperties.value,
       password: this.password1ConfigProperties.value,
-      mobileno:this.text34ConfigProperties.value,
+      mobileno: this.text34ConfigProperties.value,
       role: this.dropdowns1ConfigProperties.value,
     };
 
     this.AuthService.register(payload).subscribe(
       (response) => {
-        alert("Registration Successfully")
-        console.log('Success:', response);
+        alert('Registration Successfully');
+        this.toastService.showSuccess('Register Successfully');
+        this.router.navigate(['login']);
       },
       (error) => {
-        alert("Error while Registration")
-        console.error('Error:', error);
-      }
+        alert('Error while Registration');
+        this.toastService.showError('Email already exists.');
+      },
     );
-
   }
 }
