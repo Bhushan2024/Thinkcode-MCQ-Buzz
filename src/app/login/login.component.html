@@ -1,13 +1,13 @@
-
-<br><br><div
-  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid mt-3">
   <div class="row"><div class="col-lg-12 color-black"></div></div>
-  <div class="row">
-    <div class="col-lg-3 color-black"></div>
-    <div class="col-lg-6 color-black">
+  <div class="row mt-5">
+    <!-- <div class="col-lg-3 color-black"></div> -->
+    <div class="col-lg-2 color-black"></div>
+    <div class="col-lg-4 color-black p-3 shadow">
       <div class="row">
         <div class="col-lg-12 color-black">
-          <h3>Login to start</h3>
+          <h3 class="mb-3">Login to start</h3>
         </div>
       </div>
       <div class="row">
@@ -18,7 +18,7 @@
             (configPropertiesChanged)="email1Changed($event)"></email-input>
         </div>
       </div>
-      <div class="row">
+      <div class="row  mt-3">
         <div class="col-lg-12 color-black">
           <password-input
             [configProperties]="password1ConfigProperties"
@@ -27,13 +27,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12 color-black">
+        <div class="col-lg-12 color-black mt-5">
           <button-component
             [configProperties]="button1ConfigProperties"
             (submitForm)="button1submitForm()"></button-component>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 color-black"></div>
+    <div class="col-lg-5 color-black">
+      <img src="https://osoq.com/clipart-images/online-class-clipart/online-learning-illustration-study-home-brunette-teacher-with-dark-skin-teaches-children-transparent-background-image.png" height="400rem">
+    </div>
+    <div class="col-lg-1 color-black"></div>
   </div>
 </div>
+ `

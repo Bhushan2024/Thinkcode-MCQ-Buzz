@@ -106,5 +106,147 @@
 .font-weight-400 {
   font-weight: 400 !important;
 }
+.background-image {
+  background-image: false !important;
+}
+.background-color-ffffff {
+  background-color: #ffffff !important;
+}
+.background-image-none {
+  background-image: none !important;
+}
+.background-repeat-no-repeat {
+  background-repeat: no-repeat !important;
+}
+.background-size-width-100-percent {
+  background-size-width: 100% !important;
+}
+.background-size-height-100-percent {
+  background-size-height: 100% !important;
+}
+.flex-direction-column {
+  flex-direction: column !important;
+}
+.align-items-flex-start {
+  align-items: flex-start !important;
+}
+.justify-content-flex-start {
+  justify-content: flex-start !important;
+}
+.font-family-inherit {
+  font-family: inherit !important;
+}
+.color-black {
+  color: black !important;
+}
+.color-6c757d {
+  color: #6c757d !important;
+}
+.text-align-center {
+  text-align: center !important;
+}
+.margin-top-10-percent {
+  margin-top: 10% !important;
+}
+.border-radius-4 {
+  border-radius: 4px !important;
+}
+.border-width-1 {
+  border-width: 1px !important;
+}
+.position-relative {
+  position: relative !important;
+}
+.background-color-rgb74-21-72-1 {
+  background-color: rgb(74, 21, 72, 1) !important;
+}
+.font-size-16 {
+  font-size: 16px !important;
+}
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+.color-rgb255-255-255-1 {
+  color: rgb(255, 255, 255, 1) !important;
+}
+.padding-top-6 {
+  padding-top: 6px !important;
+}
+.padding-bottom-6 {
+  padding-bottom: 6px !important;
+}
+.background-color-fff {
+  background-color: #fff !important;
+}
+.border-style-solid {
+  border-style: solid !important;
+}
+.border-color-e0e0e0 {
+  border-color: #e0e0e0 !important;
+}
+.padding-top-12 {
+  padding-top: 12px !important;
+}
+.padding-bottom-12 {
+  padding-bottom: 12px !important;
+}
+.padding-left-16 {
+  padding-left: 16px !important;
+}
+.padding-right-16 {
+  padding-right: 16px !important;
+}
+.padding-left-10 {
+  padding-left: 10px !important;
+}
+.padding-right-10 {
+  padding-right: 10px !important;
+}
+.color-000000 {
+  color: #000000 !important;
+}
+.height-48 {
+  height: 48px !important;
+}
+.text-align-left {
+  text-align: left !important;
+}
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+.width-100-percent {
+  width: 100% !important;
+}
+.margin-top-12 {
+  margin-top: 12px !important;
+}
+
+.default {
+  max-width: 500px;
+}
+.color-white{
+  color:#ffffff
+}
+.margin-right-5rem{
+  margin-right: 5rem
+}
+.margin-left-5rem{
+  margin-left: 5rem
+}
+.margin-top-5-percent{
+  margin-top: 5% !important;
+}
+.margin-bottom-5-percent{
+  margin-bottom: 3% !important;
+}
+.border-radius-05rem{
+  border-radius: 0.5rem;
+}
+.padding-top-08rem{
+  padding-top: 0.5rem;
+}
+.padding-bottom-08rem{
+  padding-bottom: 0.5rem;
+}
 
 @import '~@ng-select/ng-select/themes/default.theme.css';

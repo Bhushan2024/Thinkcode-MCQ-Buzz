@@ -1,124 +1,113 @@
 <div class="maindiv">
   <br>
-<h3>Sections of the Exam</h3>
-<br>
-<div
-  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
-  <div class="row margin-left-15-percent padding-right-16-percent margin-top-5-percent">
-    <div class="col-lg-9 color-black">
-      <subtitle-text [configProperties]="subtitleText82ConfigProperties"></subtitle-text
-      ><body-text [configProperties]="bodyText41ConfigProperties"></body-text
-      ><body-text [configProperties]="bodyText52ConfigProperties"></body-text>
-    </div>
-    <div class="col-lg-3 color-black">
-      <button-component
-        [configProperties]="button132ConfigProperties"
-        (submitForm)="button132submitForm()"></button-component>
+  <h3>Sections of the Exam</h3>
+  <div
+    class=" background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+    <div class="row margin-left-15-percent padding-right-16-percent margin-bottom-5-percent p-3 w-75 shadow-lg"
+      *ngFor="let section of sectionsConfig">
+      <div class="col-lg-9 color-black">
+        <subtitle-text [configProperties]="section.subtitleConfig"></subtitle-text>
+        <body-text [configProperties]="section.bodyTextConfig1"></body-text>
+        <body-text [configProperties]="section.bodyTextConfig2"></body-text>
+      </div>
+
+      <div class="col-lg-3 color-black text-center">
+        <button-component 
+          [configProperties]="{helpText: '',
+            styles: {buttonStyle: 'border-radius-4 padding-left-10 padding-right-10 background-color-rgb74-21-72-1 color-white font-size-16 padding-top-6 padding-bottom-6 margin-bottom-5-percent'
+            },btnText: 'Add Question'
+          }"
+          (click)="section.buttonConfig.onClick()"
+          (submitForm)="button132submitForm(section.id)">
+        </button-component>
+        <button-component 
+          [configProperties]="{helpText: '',
+            styles: {buttonStyle: 'border-radius-4 background-color-rgb74-21-72-1 color-white font-size-16 padding-top-6 padding-bottom-6 '
+            },btnText: 'Show Question'
+          }"
+          (submitForm)="button133submitForm(section.id)">
+        </button-component>
+      </div>
     </div>
   </div>
 </div>
 
 
-  <ng-template #popupTemplate
-    ><text-input
-      [configProperties]="text81ConfigProperties"
-      [formValidation]="text81FormValidation"
-      (configPropertiesChanged)="text81Changed($event)"></text-input
-    ><check-box
-      [configProperties]="checkBox21ConfigProperties"
-      [formValidation]="checkBox21FormValidation"
-      (configPropertiesChanged)="checkBox21Changed($event)"></check-box
-    ><dropdown
-      [configProperties]="dropdowns11ConfigProperties"
-      [formValidation]="dropdowns11FormValidation"
-      (configPropertiesChanged)="dropdowns11Changed($event)"></dropdown
-    ><text-input
-      [configProperties]="text103ConfigProperties"
-      [formValidation]="text103FormValidation"
-      (configPropertiesChanged)="text103Changed($event)"></text-input
-    ><check-box
-      [configProperties]="checkBox43ConfigProperties"
-      [formValidation]="checkBox43FormValidation"
-      (configPropertiesChanged)="checkBox43Changed($event)"></check-box
-    ><number-input
-      [configProperties]="number81ConfigProperties"
-      [formValidation]="number81FormValidation"
+<!-- <div class="col-lg-3 color-black">
+  <button-component [configProperties]="section.buttonConfig"
+    (click)="section.buttonConfig.onClick()"></button-component>
+</div> 
+<div class="col-lg-3 color-black">
+      <button-component
+        [configProperties]="button132ConfigProperties"
+        (submitForm)="button132submitForm()"></button-component>
+    </div>
+
+-->
+
+
+<div>
+  <ng-template #popupTemplate><text-input [configProperties]="text81ConfigProperties"
+      [formValidation]="text81FormValidation" (configPropertiesChanged)="text81Changed($event)"></text-input><check-box
+      [configProperties]="checkBox21ConfigProperties" [formValidation]="checkBox21FormValidation"
+      (configPropertiesChanged)="checkBox21Changed($event)"></check-box>
+    <dropdown [configProperties]="dropdowns11ConfigProperties" [formValidation]="dropdowns11FormValidation"
+      (configPropertiesChanged)="dropdowns11Changed($event)"></dropdown><text-input
+      [configProperties]="text103ConfigProperties" [formValidation]="text103FormValidation"
+      (configPropertiesChanged)="text103Changed($event)"></text-input><check-box
+      [configProperties]="checkBox43ConfigProperties" [formValidation]="checkBox43FormValidation"
+      (configPropertiesChanged)="checkBox43Changed($event)"></check-box><number-input
+      [configProperties]="number81ConfigProperties" [formValidation]="number81FormValidation"
       (configPropertiesChanged)="number81Changed($event)"></number-input>
     <div class="row">
       <div class="col-lg-6 color-black">
-        <text-input
-          [configProperties]="text114ConfigProperties"
-          [formValidation]="text114FormValidation"
+        <text-input [configProperties]="text114ConfigProperties" [formValidation]="text114FormValidation"
           (configPropertiesChanged)="text114Changed($event)"></text-input>
       </div>
       <div class="col-lg-6 color-black">
-        <check-box
-          [configProperties]="checkBox54ConfigProperties"
-          [formValidation]="checkBox54FormValidation"
-          (configPropertiesChanged)="checkBox54Changed($event)"></check-box
-        ><number-input
-          [configProperties]="number92ConfigProperties"
-          [formValidation]="number92FormValidation"
+        <check-box [configProperties]="checkBox54ConfigProperties" [formValidation]="checkBox54FormValidation"
+          (configPropertiesChanged)="checkBox54Changed($event)"></check-box><number-input
+          [configProperties]="number92ConfigProperties" [formValidation]="number92FormValidation"
           (configPropertiesChanged)="number92Changed($event)"></number-input>
       </div>
     </div>
     <div class="row margin-top-5-percent">
       <div class="col-lg-6 color-black">
-        <text-input
-          [configProperties]="text125ConfigProperties"
-          [formValidation]="text125FormValidation"
+        <text-input [configProperties]="text125ConfigProperties" [formValidation]="text125FormValidation"
           (configPropertiesChanged)="text125Changed($event)"></text-input>
       </div>
       <div class="col-lg-6 color-black">
-        <check-box
-          [configProperties]="checkBox65ConfigProperties"
-          [formValidation]="checkBox65FormValidation"
-          (configPropertiesChanged)="checkBox65Changed($event)"></check-box
-        ><number-input
-          [configProperties]="number103ConfigProperties"
-          [formValidation]="number103FormValidation"
+        <check-box [configProperties]="checkBox65ConfigProperties" [formValidation]="checkBox65FormValidation"
+          (configPropertiesChanged)="checkBox65Changed($event)"></check-box><number-input
+          [configProperties]="number103ConfigProperties" [formValidation]="number103FormValidation"
           (configPropertiesChanged)="number103Changed($event)"></number-input>
       </div>
     </div>
     <div class="row margin-top-5-percent">
       <div class="col-lg-6 color-black">
-        <text-input
-          [configProperties]="text136ConfigProperties"
-          [formValidation]="text136FormValidation"
+        <text-input [configProperties]="text136ConfigProperties" [formValidation]="text136FormValidation"
           (configPropertiesChanged)="text136Changed($event)"></text-input>
       </div>
       <div class="col-lg-6 color-black">
-        <check-box
-          [configProperties]="checkBox76ConfigProperties"
-          [formValidation]="checkBox76FormValidation"
-          (configPropertiesChanged)="checkBox76Changed($event)"></check-box
-        ><number-input
-          [configProperties]="number114ConfigProperties"
-          [formValidation]="number114FormValidation"
+        <check-box [configProperties]="checkBox76ConfigProperties" [formValidation]="checkBox76FormValidation"
+          (configPropertiesChanged)="checkBox76Changed($event)"></check-box><number-input
+          [configProperties]="number114ConfigProperties" [formValidation]="number114FormValidation"
           (configPropertiesChanged)="number114Changed($event)"></number-input>
       </div>
     </div>
     <div class="row margin-top-5-percent">
       <div class="col-lg-6 color-black">
-        <text-input
-          [configProperties]="text147ConfigProperties"
-          [formValidation]="text147FormValidation"
+        <text-input [configProperties]="text147ConfigProperties" [formValidation]="text147FormValidation"
           (configPropertiesChanged)="text147Changed($event)"></text-input>
       </div>
       <div class="col-lg-6 color-black">
-        <check-box
-          [configProperties]="checkBox87ConfigProperties"
-          [formValidation]="checkBox87FormValidation"
-          (configPropertiesChanged)="checkBox87Changed($event)"></check-box
-        ><number-input
-          [configProperties]="number125ConfigProperties"
-          [formValidation]="number125FormValidation"
+        <check-box [configProperties]="checkBox87ConfigProperties" [formValidation]="checkBox87FormValidation"
+          (configPropertiesChanged)="checkBox87Changed($event)"></check-box><number-input
+          [configProperties]="number125ConfigProperties" [formValidation]="number125FormValidation"
           (configPropertiesChanged)="number125Changed($event)"></number-input>
       </div>
     </div>
-    <br>
-    <button-component
-      [configProperties]="button141ConfigProperties"
-      (submitForm)="button141submitForm()"></button-component
-  ></ng-template>
-</div>
+    <button-component [configProperties]="button141ConfigProperties"
+      (submitForm)="button141submitForm()"></button-component>
+  </ng-template>
+  </div>

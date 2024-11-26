@@ -314,12 +314,10 @@ export class WelcomeComponent implements OnInit {
 
     this.AuthService.register(payload).subscribe(
       (response) => {
-        alert('Registration Successfully');
         this.toastService.showSuccess('Register Successfully');
         this.router.navigate(['login']);
       },
       (error) => {
-        alert('Error while Registration');
         this.toastService.showError('Email already exists.');
       },
     );

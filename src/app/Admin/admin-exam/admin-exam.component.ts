@@ -230,7 +230,7 @@ export class AdminExamComponent implements OnInit {
           supportingTextStyle: 'color-6c757d',
           cardComponentStyle: 'height-50',
           cardBodyStyle:
-            'border-width-1 border-style-solid border-color-000000 border-radius-4 padding-top-12 padding-left-16 padding-right-16 padding-bottom-12',
+            ' padding-top-12 padding-left-16 padding-right-16 padding-bottom-12',
         },
         isHidden: false,
         propertyName: exam.id,

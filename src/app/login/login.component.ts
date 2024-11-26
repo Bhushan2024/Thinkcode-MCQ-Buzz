@@ -153,24 +153,20 @@ export class LoginComponent implements OnInit {
 
     this.AuthService.login(payload).subscribe(
       (response) => {
-        // Save token and role in localStorage
-        localStorage.setItem('currentUserRole', response.role);
-        localStorage.setItem('authToken', response.token);
-        localStorage.setItem('currentUserId', response.userId);
 
-        // Redirect based on role
         if (response.role === 'Student') {
           this.router.navigate(['/user-dashboard']);
         } else if (response.role === 'Teacher') {
-          this.router.navigate(['/admin-exam']);
+          console.log("Inside Teacher role")
+          this.router.navigate(['/admin-dashboard']);
         } else {
-          alert('Unrecognized role. Contact support.');
+          this.toastService.showError('Please check Credentials again')
         }
 
         this.toastService.showSuccess('Login Successfully');
       },
       (error) => {
-        alert('Error while logging in');
+        this.toastService.showError('Please check Credentials again')
         console.error('Error:', error);
       },
     );

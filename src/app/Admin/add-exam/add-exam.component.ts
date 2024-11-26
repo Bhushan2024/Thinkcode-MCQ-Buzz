@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ExamService } from 'src/app/Service/exam.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../Service/toast.service';
+
 
 @Component({
   selector: 'add-exam',
@@ -31,7 +33,7 @@ export class AddExamComponent implements OnInit {
   public checkBox12FormValidation: any;
   public button113ConfigProperties: any;
 
-  constructor(private examService: ExamService, private router: Router) {}
+  constructor(private examService: ExamService, private router: Router, private toastService: ToastService,) {}
 
   ngOnInit() {
     this.titleH3Text31ConfigProperties = {
@@ -460,13 +462,12 @@ export class AddExamComponent implements OnInit {
 
     this.examService.AddExam(payload).subscribe(
       (response) => {
-        alert("Exam Added Successfully")
-        console.log('Success:', response);
+        this.toastService.showSuccess('Exam Added Successfully');
         window.location.reload();
 
       },
       (error) => {
-        alert("Error while Registration")
+        this.toastService.showSuccess('Error while Registration');
         this.router.navigate(['/admin-exam']);
         window.location.reload();
       }

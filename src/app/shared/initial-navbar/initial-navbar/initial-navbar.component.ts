@@ -8,14 +8,16 @@ import { AuthService } from 'src/app/Service/auth.service';
   styleUrls: ['./initial-navbar.component.scss'],
 })
 export class InitialNavbarComponent implements OnInit {
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken'); 
+  }
   public titleH3Text12ConfigProperties: any;
   public subtitleText22ConfigProperties: any;
   public subtitleText33ConfigProperties: any;
   public button1ConfigProperties: any;
   public button12ConfigProperties: any;
   public button123ConfigProperties: any;
-
-  isLoggedIn: boolean = false;
 
   constructor(
     private router: Router,
@@ -164,17 +166,18 @@ export class InitialNavbarComponent implements OnInit {
       variableName: 'button123ConfigProperties',
       listOfOptions: [],
     };
+    
   }
 
   button1submitForm() {
     this.router.navigate(['login']);
-    this.isLoggedIn = true;
   }
   button12submitForm() {
     this.router.navigate(['register']);
   }
   button123submitForm() {
-    this.isLoggedIn = false;
-    this.router.navigate(['login']);
+    localStorage.clear(); 
+    location.reload();
   }
+  
 }

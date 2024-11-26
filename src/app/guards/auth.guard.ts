@@ -14,28 +14,28 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-    
-    const isLoggedIn = this.authService.isLoggedIn;
-
-    if (!isLoggedIn) {
       
+      const isLoggedIn = this.authService.isLoggedIn;
+      console.log("Islog"+isLoggedIn)
+    if (!isLoggedIn) {
+
       //this.toastService.showInfo("Please login first.");
       this.router.navigate(['/login']);
       return false;
     }
 
     // Check if the user is authorized to access the route
-    const requiredRoles = route.data['roles'] as Array<string>; // Roles required for this route
-    const loggedInUser = this.authService.getLoggedInUser();
+    // const requiredRoles = route.data['roles'] as Array<string>; // Roles required for this route
+    // const loggedInUser = this.authService.getLoggedInUser();
 
-    if(loggedInUser){
-      if (requiredRoles && !requiredRoles.includes(loggedInUser.role)) {
-        // User is logged in but not authorized, redirect to unauthorized page
-        //this.toastService.showWarning("You are not authorized to access this page.");
-        this.router.navigate(['/unauthorized']);
-        return false;
-      }
-    }
+    // if(loggedInUser){
+    //   if (requiredRoles && !requiredRoles.includes(loggedInUser.role)) {
+    //     // User is logged in but not authorized, redirect to unauthorized page
+    //     //this.toastService.showWarning("You are not authorized to access this page.");
+    //     this.router.navigate(['/unauthorized']);
+    //     return false;
+    //   }
+    // }
 
     // User is logged in and authorized
     return true;

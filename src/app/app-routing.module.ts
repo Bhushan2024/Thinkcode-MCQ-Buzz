@@ -6,15 +6,17 @@ import { AdminExamComponent } from './Admin/admin-exam/admin-exam.component';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AdminSectionComponent } from './Admin/admin-section/admin-section.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
-  { path: 'user-dashboard', component: WelcomeComponent },
+  { path: 'user-dashboard', component: WelcomeComponent ,  canActivate: [AuthGuard]},
   { path: 'teacher-dashboard', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: WelcomeComponent },
   { path: 'admin-exam', component: AdminExamComponent, canActivate: [AuthGuard] },
   { path: 'add-exam', component: AddExamComponent, canActivate: [AuthGuard] },
   { path: 'admin-section/:examId', component: AdminSectionComponent, canActivate: [AuthGuard] },
+  {path:'admin-dashboard', component:AdminDashboardComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
@@ -22,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

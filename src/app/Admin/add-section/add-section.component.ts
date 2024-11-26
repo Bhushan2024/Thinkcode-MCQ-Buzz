@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExamService } from 'src/app/Service/exam.service';
+import { ToastService } from '../../Service/toast.service';
+
 
 @Component({
   selector: 'add-section',
@@ -21,7 +23,7 @@ export class AddSectionComponent implements OnInit {
   public number74FormValidation: any;
   public button121ConfigProperties: any;
 
-  constructor(private examService: ExamService) {}
+  constructor(private examService: ExamService, private toastService: ToastService,) {}
 
   ngOnInit() {
     console.log('Received Exam IDDDDDD:', this.examId);
@@ -219,7 +221,7 @@ export class AddSectionComponent implements OnInit {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
         buttonStyle:
-          'border-radius-4 border-width-1 padding-top-6 padding-bottom-6 font-size-16 font-weight-400 color-rgb255-255-255-1 background-color-rgb74-21-72-1 margin-top-15',
+          'border-radius-4 border-width-1 margin-top-12 padding-top-6 padding-bottom-6 font-size-16 font-weight-400 color-rgb255-255-255-1 background-color-rgb74-21-72-1 margin-top-15',
       },
       isHidden: false,
       propertyName: '9558ab71-3dcf-4434-b989-8c340e5292e3',
@@ -269,13 +271,12 @@ export class AddSectionComponent implements OnInit {
     };
     this.examService.AddSection(payload).subscribe(
       (response) => {
-        alert("Section Added Successfully")
-        console.log('Success:', response);
+        this.toastService.showSuccess('Section Added Successfully');
         window.location.reload();
 
       },
       (error) => {
-        alert("Error while Adding Section")
+        this.toastService.showSuccess('Error while Adding Section');
         window.location.reload();
       }
     );

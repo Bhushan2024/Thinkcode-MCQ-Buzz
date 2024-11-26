@@ -33,6 +33,8 @@ import { PopupComponent } from './shared/components/popup/popup.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { InitialNavbarComponent } from './shared/initial-navbar/initial-navbar/initial-navbar.component';
 import { AuthInterceptor } from './interceptor/exam.interceptor';
+import { SupportingTextComponent } from './shared/components/supporting-text/supporting-text.component';
+import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { AuthInterceptor } from './interceptor/exam.interceptor';
     AdminSectionComponent,
     PopupComponent,
     InitialNavbarComponent,
+    SupportingTextComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
