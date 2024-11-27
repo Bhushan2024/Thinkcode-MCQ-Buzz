@@ -1,0 +1,39 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <div>
+    <a
+      *ngIf="
+        (configProperties?.navigateTo === '-1' || configProperties?.navigateTo === '') &&
+        configProperties?.staticFn?.length === 0
+      "
+      [href]="configProperties.href"
+      (click)="onLinkTextChanged()"
+      (change)="onLinkTextChanged()"
+      [target]="configProperties.target"
+      [ngClass]="[configProperties.styles.linkStyle ? configProperties.styles.linkStyle : '']">
+      {{ configProperties.value }}
+    </a>
+    <a
+      *ngIf="
+        (configProperties?.navigateTo !== '-1' && configProperties?.navigateTo !== '') ||
+        configProperties?.staticFn?.length > 0
+      "
+      (click)="navigateToAnotherPage(); onLinkTextChanged()"
+      (change)="onLinkTextChanged()"
+      href="javascript:void(0)"
+      [ngClass]="[configProperties.styles.linkStyle ? configProperties.styles.linkStyle : '']">
+      {{ configProperties.value }}</a
+    >
+  </div>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

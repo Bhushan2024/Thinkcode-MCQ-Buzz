@@ -5,6 +5,7 @@ import { QuestionDto, QuestionDtoSingleResponse, Client } from '../../Service/ap
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ExamService } from 'src/app/Service/exam.service';
+import { response } from 'express';
 
 
 
@@ -16,7 +17,7 @@ import { ExamService } from 'src/app/Service/exam.service';
 })
 
 export class AdminSectionComponent implements OnInit {
-  @Input() examId!: string; 
+  @Input() examId!: string;
   public subtitleText82ConfigProperties: any;
   public bodyText41ConfigProperties: any;
   public bodyText52ConfigProperties: any;
@@ -63,7 +64,13 @@ export class AdminSectionComponent implements OnInit {
   public button141ConfigProperties: any;
   public number126ConfigProperties: any;
   sectionsConfig: any[] = [];
-  public sectionId: number=0;
+  questionConfig: any[] = [];
+  public sectionId: number = 0;
+  public popup2ConfigProperties: any;
+  @ViewChild('popup2Template') popup2Template!: TemplateRef<any>;
+  popup2BsModalRef!: BsModalRef;
+  public subtitleText11ConfigProperties: any;
+  public bodyText11ConfigProperties: any;
 
   constructor(public modalService: BsModalService,
     private apiService: Client, private route: ActivatedRoute, private examService: ExamService
@@ -75,7 +82,7 @@ export class AdminSectionComponent implements OnInit {
       this.examId = params.get('examId')!;
       console.log('Received Exam ID:', this.examId);
     });
-    let sectionIdforAddSection:number;
+    let sectionIdforAddSection: number;
 
 
     this.subtitleText82ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "subtitleTextStyle": "color-black" }, "isHidden": false, "propertyName": "e84864bd-3014-44d8-bf49-a5c208ea9cef", "showLabel": false, "type": "subtitle-text", "value": "Section Titile", "formControlName": "subtitleText82FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faText", "listChilds": [], "styleType": "", "variableName": "subtitleText82ConfigProperties", "listOfOptions": [] };
@@ -152,6 +159,15 @@ export class AdminSectionComponent implements OnInit {
     this.number125FormValidation = { "validations": [{ "validationType": "readonly", "required": false }, { "validationType": "mandatory", "required": false }, { "validationType": "min", "value": 0, "required": false }, { "validationType": "max", "value": 100, "required": false }] };
     this.button141ConfigProperties = { "helpText": "", "styles": { "componentStyle": "margin-top-5-percent", "supportingTextStyle": "color-6c757d", "buttonStyle": "border-radius-4 border-width-1 padding-top-6 padding-bottom-6 margin-top-12 font-size-16 font-weight-400 color-rgb255-255-255-1 background-color-rgb74-21-72-1" }, "isHidden": false, "propertyName": "59b1f097-e709-40c8-9328-8199c8480b69", "showLabel": false, "type": "button", "formControlName": "button141FormControl", "btnText": "Add Question", "btnType": "submit", "navigateTo": "", "staticFn": [], "customCssClasses": [], "childs": [], "icon": "faRectangleLandscape", "listChilds": [], "styleType": "", "variableName": "button141ConfigProperties", "listOfOptions": [] };
 
+    this.popup2ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "headingTextStyle": "color-black", "iconStyle": "color-black", "popupStyle": "background-color-fff border-radius-4 border-width-1 border-style-solid border-color-e0e0e0 padding-top-12 padding-bottom-12 padding-left-16 padding-right-16 color-000000 position-relative", "popupHeaderStyle": "", "popupBodyStyle": "" }, "isHidden": false, "propertyName": "5433ab3b-a8a5-46c1-870e-bb6f61f29b9c", "showLabel": false, "type": "popup", "value": "default", "formControlName": "popup2FormControl", "navigateTo": "", "customCssClasses": [], "childs": [{ "componentId": 16, "componentName": "Subtitle Text11", "listChilds": [], "styleType": "", "mobileFloatAlignment": "", "childs": [], "icon": "faText", "componentType": "Text", "showLabel": false, "propertyName": "4165d981-d4ff-476a-bef4-baa6652112cb", "newProperty": true, "hasChildEntity": false, "hasPlaceholder": false, "type": "subtitle-text", "sortOrder": 210, "value": "Question No. Question Text", "isActive": false, "customCssClasses": [], "note": "", "isHidden": false, "isImplemented": true, "styles": {}, "labelStyles": {}, "helpText": "", "navigateTo": "", "listOfOptions": [], "customStyles": [{ "styleId": 1, "styleType": "component-styles", "styleObj": {}, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 4, "styleType": "supporting-text-styles", "styleObj": { "color": "#6c757d" }, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 16, "styleType": "subtitle-text-styles", "styleObj": { "color": "black" }, "customCssClasses": [], "flexAlignmentClasses": [] }], "customStyleTypeOptions": ["component-styles", "subtitle-text-styles", "supporting-text-styles"], "allowApiConfiguration": false, "formControlName": "", "templatePropertyId": 1, "isDataStoredInSession": false, "fieldStorageKeyValue": "", "mapValuesFromProperty": "", "index": 0 }, { "componentId": 17, "componentName": "Body Text11", "listChilds": [], "styleType": "", "mobileFloatAlignment": "", "childs": [], "icon": "faBold", "componentType": "Text", "showLabel": false, "propertyName": "999b41cb-1360-4333-a553-15ddd7c73dee", "newProperty": true, "hasChildEntity": false, "hasPlaceholder": false, "type": "body-text", "sortOrder": 220, "value": "Option_1", "isActive": false, "customCssClasses": [], "note": "", "isHidden": false, "isImplemented": true, "styles": {}, "labelStyles": {}, "helpText": "", "navigateTo": "", "listOfOptions": [], "customStyles": [{ "styleId": 1, "styleType": "component-styles", "styleObj": {}, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 4, "styleType": "supporting-text-styles", "styleObj": { "color": "#6c757d" }, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 9, "styleType": "body-text-styles", "styleObj": { "color": "black" }, "customCssClasses": [], "flexAlignmentClasses": [] }], "customStyleTypeOptions": ["component-styles", "body-text-styles", "supporting-text-styles"], "allowApiConfiguration": false, "formControlName": "", "templatePropertyId": 2, "isDataStoredInSession": false, "fieldStorageKeyValue": "", "mapValuesFromProperty": "", "index": 1 }], "icon": "faClone", "listChilds": [], "styleType": "", "variableName": "popup2ConfigProperties", "listOfOptions": [], "modalTitle": "Question" };
+
+    this.subtitleText11ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "subtitleTextStyle": "color-black" }, "isHidden": false, "propertyName": "4165d981-d4ff-476a-bef4-baa6652112cb", "showLabel": false, "type": "subtitle-text", 
+    "value": "Question No. Question Text", 
+    "formControlName": "subtitleText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faText", "listChilds": [], "styleType": "", "variableName": "subtitleText11ConfigProperties", "listOfOptions": [] };
+    this.bodyText11ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "bodyTextStyle": "color-black" }, "isHidden": false, "propertyName": "999b41cb-1360-4333-a553-15ddd7c73dee", "showLabel": false, "type": "body-text", 
+    "value": "Option_1", 
+    "formControlName": "bodyText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faBold", "listChilds": [], "styleType": "", "variableName": "bodyText11ConfigProperties", "listOfOptions": [] };
+
     let reqBody = new QuestionDto(); reqBody.questionText = this.text81ConfigProperties.value;
     reqBody.isMedia = this.checkBox21ConfigProperties.value;
     reqBody.mediaType = this.dropdowns11ConfigProperties.value;
@@ -160,9 +176,9 @@ export class AdminSectionComponent implements OnInit {
     reqBody.questionMaxMarks = this.number81ConfigProperties.value;
   }
 
-  button132submitForm(sectionId:number) {
-    this.sectionId=sectionId;
-    console.log("SectionId getting by selection section "+sectionId);
+  button132submitForm(sectionId: number) {
+    this.sectionId = sectionId;
+    console.log("SectionId getting by selection section " + sectionId);
     const classes = this.popupConfigProperties.value + ' ' + 'modal-dialog-centered';
     this.popupBsModalRef = this.modalService.show(PopupComponent, {
       class: classes,
@@ -173,26 +189,57 @@ export class AdminSectionComponent implements OnInit {
       },
     });
     this.popupBsModalRef.content = this.popupTemplate;
+  }
+  button133submitForm(sectionId: number) {
+    this.sectionId = sectionId;
+    console.log("SectionId getting by selection section " + sectionId);
+    this.examService.GetSectionDetails(this.sectionId).subscribe(
+      (response) => {
+        console.log('Success:', response);
+        this.questionConfig = response.data.questions.map((item: any, index: number) => {
+          const questionTitleConfig = {
+            ...this.subtitleText11ConfigProperties,
+            value: `Q${index + 1}. ${item.questionText || 'Default Question Title'}`,
+          };
+        
+          const optionsConfig = item.options.map((option: any, optIndex: number) => ({
+            ...this.bodyText11ConfigProperties,
+            value: `Option${optIndex + 1}. ${option.optionText}[${option.isCorrect ? 'Correct' : 'Incorrect'}] Marks:${option.marks}`,
+          }));
+        
+          return {
+            id: item.questionId,
+            questionTitleConfig,
+            optionsConfig,
+          };
+        });
+        
+        console.log("New Question Data", this.questionConfig); 
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+      
+      
+    );
+    const classes = this.popup2ConfigProperties.value + ' ' + 'modal-dialog-centered';
+    this.popup2BsModalRef = this.modalService.show(PopupComponent, {
+      class: classes,
+      ignoreBackdropClick: true,
+      initialState: {
+        configProperties: this.popup2ConfigProperties,
+        dynamicContent: this.popup2Template
+      },
+    });
+    this.popup2BsModalRef.content = this.popup2Template;
+  }
+  button11submitForm() {
 
 
-  } 
-  button133submitForm(sectionId:number) {
-    this.sectionId=sectionId;
-    console.log("SectionId getting by selection section "+sectionId);
-    // const classes = this.popupConfigProperties.value + ' ' + 'modal-dialog-centered';
-    // this.popupBsModalRef = this.modalService.show(PopupComponent, {
-    //   class: classes,
-    //   ignoreBackdropClick: true,
-    //   initialState: {
-    //     configProperties: this.popupConfigProperties,
-    //     dynamicContent: this.popupTemplate
-    //   },
-    // });
-    // this.popupBsModalRef.content = this.popupTemplate;
 
 
   }
-  
+
   text81Changed(event: any) {
     this.text81ConfigProperties = event;
 
@@ -274,7 +321,7 @@ export class AdminSectionComponent implements OnInit {
       sectionId: this.sectionId,
       questionText: this.text81ConfigProperties.value,
       isMedia: (this.checkBox21ConfigProperties.value == '') ? false : this.checkBox21ConfigProperties.value,
-      mediaType:(this.dropdowns11ConfigProperties.value == null) ? 'No Media' : this.dropdowns11ConfigProperties.value,
+      mediaType: (this.dropdowns11ConfigProperties.value == null) ? 'No Media' : this.dropdowns11ConfigProperties.value,
       mediaUrl: (this.text103ConfigProperties.value == "") ? 'No Link' : this.text103ConfigProperties.value,
       isMultipleChoice: (this.checkBox43ConfigProperties.value == '') ? false : this.checkBox43ConfigProperties.value,
       isFromQuestionBank: false,
@@ -287,7 +334,7 @@ export class AdminSectionComponent implements OnInit {
         { optionText: this.text147ConfigProperties.value, isCorrect: (this.checkBox87ConfigProperties.value == '') ? false : this.checkBox87ConfigProperties.value, marks: this.number125ConfigProperties.value }
       ]
     };
-    console.log("Payload for question"+payload)
+    console.log("Payload for question" + payload)
 
     this.apiService.addQuestionWithOptions(payload).subscribe(
       (response) => {

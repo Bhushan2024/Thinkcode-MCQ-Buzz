@@ -40,5 +40,13 @@ export class ExamService {
     const url = `${this.buildUrl('v1/Section/getSectionsByExamId')}?ExamId=${ExamId}`;
     return this.http.get(url, { headers: this.getHeaders() });
   }
+  GetSectionDetails(SectionId: number): Observable<any> {
+    const url = `${this.buildUrl('v1/Section/GetSectionDetails')}?sectionId=${SectionId}`;
+    return this.http.get(url, { headers: this.getHeaders() });
+  }
+  GetExamDataByUserId(teacherId: string): Observable<any> {
+    const url = this.buildUrl('v1/Exam/GetExamDataByUserId');
+    return this.http.post(url, JSON.stringify(teacherId), { headers: this.getHeaders() });
+  }
   
 }

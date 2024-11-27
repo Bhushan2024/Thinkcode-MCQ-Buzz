@@ -7,6 +7,7 @@ import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { AdminSectionComponent } from './Admin/admin-section/admin-section.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
+import { AdminResultComponent } from './Admin/admin-result/admin-result.component';
 
 const routes: Routes = [
   { path: 'user-dashboard', component: WelcomeComponent ,  canActivate: [AuthGuard]},
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path: 'add-exam', component: AddExamComponent, canActivate: [AuthGuard] },
   { path: 'admin-section/:examId', component: AdminSectionComponent, canActivate: [AuthGuard] },
   {path:'admin-dashboard', component:AdminDashboardComponent, canActivate: [AuthGuard]},
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  {path:'admin-result', component:AdminResultComponent, canActivate: [AuthGuard]},
+
+  { path: '**', redirectTo: 'admin-dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

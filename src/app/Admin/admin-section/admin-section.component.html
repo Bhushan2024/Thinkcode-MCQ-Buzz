@@ -110,4 +110,23 @@
     <button-component [configProperties]="button141ConfigProperties"
       (submitForm)="button141submitForm()"></button-component>
   </ng-template>
+
+  <ng-template #popup2Template>
+    <div *ngFor="let section of questionConfig; let i = index">
+      <!-- Question Title -->
+      <subtitle-text 
+        [configProperties]="section.questionTitleConfig">
+      </subtitle-text>
+      
+      <!-- Options -->
+      <div *ngFor="let option of section.optionsConfig">
+        <body-text 
+          [configProperties]="option">
+        </body-text>
+      </div>
+    </div>
+  </ng-template>
+  
+
+  
   </div>

@@ -443,7 +443,6 @@ export class AddExamComponent implements OnInit {
     this.checkBox12ConfigProperties = event;
   }
   button113submitForm() {
-
     const payload = {
       title: this.text41ConfigProperties.value,
       description:this.textArea1ConfigProperties.value,

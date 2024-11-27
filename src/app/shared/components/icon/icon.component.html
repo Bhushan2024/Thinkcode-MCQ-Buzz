@@ -1,0 +1,21 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <fa-icon
+    [icon]="getIcons(configProperties.value)"
+    [id]="configProperties.propertyName"
+    (click)="onIconChanged()"
+    (change)="onIconChanged()"
+    [ngClass]="[configProperties.styles.iconStyle ? configProperties.styles.iconStyle : '']">
+  </fa-icon>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

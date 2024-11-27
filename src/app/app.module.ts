@@ -35,6 +35,9 @@ import { InitialNavbarComponent } from './shared/initial-navbar/initial-navbar/i
 import { AuthInterceptor } from './interceptor/exam.interceptor';
 import { SupportingTextComponent } from './shared/components/supporting-text/supporting-text.component';
 import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
+import { IconComponent } from './shared/components/icon/icon.component';
+import { LinkTextComponent } from './shared/components/link-text/link-text.component';
+import { AdminResultComponent } from './Admin/admin-result/admin-result.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard
     PopupComponent,
     InitialNavbarComponent,
     SupportingTextComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    IconComponent,
+    LinkTextComponent,
+    AdminResultComponent
   ],
   imports: [
     BrowserModule,

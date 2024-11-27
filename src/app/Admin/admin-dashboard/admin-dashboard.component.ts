@@ -895,7 +895,10 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/admin-exam'])
   }
   card61Clicked() {}
-  button132submitForm() {}
+  button132submitForm() {
+    this.router.navigate(['/admin-result'])
+
+  }
   card72Clicked() {}
   button143submitForm() {}
   card83Clicked() {}

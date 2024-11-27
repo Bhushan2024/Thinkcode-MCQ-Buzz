@@ -197,10 +197,10 @@
   padding-right: 16px !important;
 }
 .padding-left-10 {
-  padding-left: 10px !important;
+  padding-left: 11px !important;
 }
 .padding-right-10 {
-  padding-right: 10px !important;
+  padding-right: 11px !important;
 }
 .color-000000 {
   color: #000000 !important;
@@ -247,6 +247,83 @@
 }
 .padding-bottom-08rem{
   padding-bottom: 0.5rem;
+}
+.background-image {
+  background-image: false !important;
+}
+.background-color-ffffff {
+  background-color: #ffffff !important;
+}
+.background-image-none {
+  background-image: none !important;
+}
+.background-repeat-no-repeat {
+  background-repeat: no-repeat !important;
+}
+.background-size-width-100-percent {
+  background-size-width: 100% !important;
+}
+.background-size-height-100-percent {
+  background-size-height: 100% !important;
+}
+.flex-direction-column {
+  flex-direction: column !important;
+}
+.align-items-flex-start {
+  align-items: flex-start !important;
+}
+.justify-content-flex-start {
+  justify-content: flex-start !important;
+}
+.justify-content-flex-end {
+  justify-content: flex-end !important;
+}
+.font-family-inherit {
+  font-family: inherit !important;
+}
+.color-black {
+  color: black !important;
+}
+.color-6c757d {
+  color: #6c757d !important;
+}
+.box-shadow-0-10-15--3-rgb0-0-0--01-0-4-6--4-rgb0-0-0--01 {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+.margin-top-10-percent {
+  margin-top: 10% !important;
+}
+.box-shadow-0-0-0000 {
+  box-shadow: 0 0 #0000 !important;
+}
+.color-rgb0-193-0-1 {
+  color: rgb(0, 193, 0, 1) !important;
+}
+.color-rgb28-136-227-1 {
+  color: rgb(28, 136, 227, 1) !important;
+}
+.font-weight-800 {
+  font-weight: 800 !important;
+}
+.padding-top-none {
+  padding-top: none !important;
+}
+.font-size-16 {
+  font-size: 16px !important;
+}
+.color-rgb255-31-31-1 {
+  color: rgb(255, 31, 31, 1) !important;
+}
+.margin-right-5rem{
+  margin-right: 1rem
+}
+.margin-left-1rem{
+  margin-right: 1rem
 }
 
 @import '~@ng-select/ng-select/themes/default.theme.css';
