@@ -18,8 +18,8 @@ export class AdminResultComponent implements OnInit {
   public subtitleText15ConfigProperties: any;
   public linkText1ConfigProperties: any;
   public teacherId: string | null = null;
-    public examresults: any[] = [];
-    examresultlist: any[] = [];
+  public examresults: any[] = [];
+  examresultlist: any[] = [];
 
 
 
@@ -262,18 +262,29 @@ export class AdminResultComponent implements OnInit {
         ...this.subtitleText11ConfigProperties,
         value: `Total Student: ${item.totalStudents}`,
       };
-    
+      const iconColor = item.examStatus === 'Active' ? 'green' : 'red';
+      console.log("Color "+iconColor)
+      const icon = {
+        ...this.icon21ConfigProperties,
+        styles: {
+          componentStyle: 'margin-right-5rem',
+          supportingTextStyle: 'color-6c757d',
+          iconStyle: `color-${iconColor}`, 
+        },
+      };
+      console.log("Test the icon data 0 "+JSON.stringify(this.icon21ConfigProperties));
+
+
       // const optionsConfig = item.options.map((option: any, optIndex: number) => ({
       //   ...this.bodyText11ConfigProperties,
       //   value: `Option${optIndex + 1}. ${option.optionText}[${option.isCorrect ? 'Correct' : 'Incorrect'}] Marks:${option.marks}`,
       // }));
-      console.log("Test"+this.titleH3Text11ConfigProperties);
 
     
       return {
         id: item.examId,
         resultTitle,
-        status, percentage, passedStudent, totalstudent
+        status, percentage, passedStudent, totalstudent,icon
       };
     });
 
