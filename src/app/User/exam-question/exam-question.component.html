@@ -1,0 +1,120 @@
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row">
+    <div class="col-lg-12 color-black">
+      <div class="row mt-3 p-3">
+        <div class="col-lg-3 color-black p-1">
+          <subtitle-text [configProperties]="subtitleText101ConfigProperties"></subtitle-text>
+        </div>
+        <div class="col-lg-6 color-black p-1">
+          <subtitle-text [configProperties]="cardsConfigProperties.subtitleText123ConfigProperties"></subtitle-text>
+        </div>
+        <div class="col-lg-3 color-black p-1">
+          <subtitle-text [configProperties]="cardsConfigProperties.subtitleText112ConfigProperties"></subtitle-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-9 color-black">
+          <card [configProperties]="card11ConfigProperties" (cardClickedEvent)="card11Clicked()"
+            ><ng-template pTemplate="content"
+              ><subtitle-text [configProperties]="cardsConfigProperties.subtitleText134ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="cardsConfigProperties.subtitleText145ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="subtitleText167ConfigProperties"></subtitle-text
+              >
+              <!-- <radio-buttons
+                [configProperties]="radioButtons12ConfigProperties"
+                [formValidation]="radioButtons12FormValidation"
+                (configPropertiesChanged)="radioButtons12Changed($event)"></radio-buttons
+              >
+              <radio-buttons
+                [configProperties]="radioButtons13ConfigProperties"
+                [formValidation]="radioButtons13FormValidation"
+                (configPropertiesChanged)="radioButtons13Changed($event)"></radio-buttons
+              >
+              <radio-buttons
+                [configProperties]="radioButtons14ConfigProperties"
+                [formValidation]="radioButtons14FormValidation"
+                (configPropertiesChanged)="radioButtons14Changed($event)"></radio-buttons
+              >
+              <radio-buttons
+                [configProperties]="radioButtons15ConfigProperties"
+                [formValidation]="radioButtons15FormValidation"
+                (configPropertiesChanged)="radioButtons15Changed($event)"></radio-buttons
+              > -->
+              <div *ngFor="let option of exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].options">
+                <label>
+                  <input 
+                  type="radio" 
+                  [name]="'question_' + currentQuestionIndex" 
+                  [value]="option.optionId" 
+                  [(ngModel)]="selectedOption"
+                    >
+                  {{ option.optionText }}
+                </label>
+              </div>
+              <check-box *ngIf="exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].isMultipleChoice"
+                [configProperties]="checkBox1ConfigProperties"
+                [formValidation]="checkBox1FormValidation"
+                (configPropertiesChanged)="checkBox1Changed($event)"></check-box>
+              <div class="row margin-top-2-percent">
+                <div class="col-lg-3 color-black">
+                  <button-component
+                  *ngIf="currentQuestionIndex !== 0"
+                    [configProperties]="button77ConfigProperties"
+                    (submitForm)="button77submitForm()"></button-component>
+                </div>
+                <div class="col-lg-5 color-black"></div>
+                <div class="col-lg-4 color-black">
+                    <button-component
+                    *ngIf="!(currentSectionIndex === exam.sectionExams.length - 1 && currentQuestionIndex === exam.sectionExams[currentSectionIndex].questions.length - 1)"
+                    [configProperties]="button88ConfigProperties"
+                    (submitForm)="button88submitForm()"></button-component>
+                    <button-component
+                  *ngIf="currentSectionIndex === exam.sectionExams.length - 1 && currentQuestionIndex === exam.sectionExams[currentSectionIndex].questions.length - 1"
+                    [configProperties]="button99ConfigProperties"
+                    (submitForm)="button99submitForm()"></button-component>
+                </div></div></ng-template
+          ></card>
+        </div>
+        <div class="col-lg-3 color-black margin-top-5rem">
+          <subtitle-text [configProperties]="subtitleText193ConfigProperties"></subtitle-text
+          >
+          <!-- <div *ngFor="let section of sectionConfigs"> -->
+          <!-- <subtitle-text [configProperties]="subtitleText204ConfigProperties"></subtitle-text
+          ><subtitle-text [configProperties]="subtitleText226ConfigProperties"></subtitle-text
+          > -->
+          <div>
+          <!-- <button-component
+            [configProperties]="button55ConfigProperties"
+            (submitForm)="button55submitForm()"></button-component> -->
+            <div *ngFor="let section of exam.sectionExams; let sectionIndex = index">
+              <h5>{{ section.title }} ({{ section.questions.length }} questions)</h5>
+              <button 
+                class="rounded-pill btn btn-primary" 
+                (click)="navigateToSection(sectionIndex)">
+                Go To {{ section.title }}
+              </button>
+            
+              <!-- Display question numbers as buttons -->
+              <div>
+                <button 
+                  *ngFor="let question of section.questions; let questionIndex = index" 
+                  (click)="navigateToQuestion(sectionIndex, questionIndex)" 
+                  class="rounded-circle m-1 mt-2"
+                  [ngClass]="{'bg-secondary': currentSectionIndex === sectionIndex && currentQuestionIndex === questionIndex}">
+                  Q{{ questionIndex+1}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #popup9Template
+    ><button-component
+      [configProperties]="button122ConfigProperties"
+      (submitForm)="button122submitForm()"></button-component
+  ></ng-template>
+</div>

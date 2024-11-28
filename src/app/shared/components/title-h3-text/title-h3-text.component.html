@@ -1,0 +1,20 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <h3
+    [ngClass]="[
+      configProperties.styles.headingTextStyle ? configProperties.styles.headingTextStyle : '',
+    ]">
+    {{ configProperties.value || 'H3' }}
+  </h3>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

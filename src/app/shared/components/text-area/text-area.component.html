@@ -1,0 +1,73 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="isHidden">
+  <label
+    *ngIf="showLabel"
+    [for]="elementFormControlName"
+    [style.color]="
+      form.controls[elementFormControlName].invalid && form.controls[elementFormControlName].touched
+        ? '#DA2D20 !important'
+        : ''
+    "
+    [ngClass]="[configProperties.styles.labelStyle ? configProperties.styles.labelStyle : '']">
+    {{ label || 'Label' }}
+    <span class="ml-1 text-danger" *ngIf="isMandatory()">*</span>
+  </label>
+  <div [formGroup]="form">
+    <textarea
+      [placeholder]="placeholder || ' '"
+      type="text"
+      #textarea
+      [formControlName]="elementFormControlName"
+      [id]="configProperties.type + elementFormControlName"
+      [readonly]="isReadOnly()"
+      (change)="onTextareaChanged()"
+      (click)="onTextareaChanged()"
+      [ngClass]="[
+        form.controls[elementFormControlName].invalid &&
+        form.controls[elementFormControlName].touched
+          ? 'validation-error-wrapper'
+          : '',
+        configProperties.styles.inputStyle ? configProperties.styles.inputStyle : '',
+        autoResize ? 'p-inputtextarea-resizable' : '',
+        variant === 'filled' ? 'p-variant-filled' : '',
+      ]"></textarea>
+    <div *ngIf="helpText">
+      <small
+        [ngClass]="[
+          configProperties.styles.supportingTextStyle
+            ? configProperties.styles.supportingTextStyle
+            : '',
+        ]">
+        {{ helpText }}
+      </small>
+    </div>
+    <div
+      *ngIf="
+        form.controls[elementFormControlName].invalid &&
+        form.controls[elementFormControlName].touched
+      ">
+      <ng-container *ngIf="form.controls[elementFormControlName].errors?.['required']">
+        <p class="invalid-input-text">Please enter value</p>
+      </ng-container>
+      <ng-container *ngIf="form.controls[elementFormControlName].errors?.['minlength']">
+        <p class="invalid-input-text">
+          Value must be at least
+          {{
+            form.controls[elementFormControlName].errors?.['minlength'].requiredLength
+          }}
+          characters long
+        </p>
+      </ng-container>
+      <ng-container *ngIf="form.controls[elementFormControlName].errors?.['maxlength']">
+        <p class="invalid-input-text">
+          Value must be maximum
+          {{
+            form.controls[elementFormControlName].errors?.['maxlength'].requiredLength
+          }}
+          characters long
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</div>

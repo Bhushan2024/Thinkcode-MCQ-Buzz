@@ -1,0 +1,60 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <label
+    *ngIf="configProperties.showLabel && configProperties.type !== 'toggle-switch'"
+    [for]="configProperties.formControlName"
+    [style.color]="
+      form.controls[configProperties.formControlName].invalid &&
+      form.controls[configProperties.formControlName].touched
+        ? '#DA2D20 !important'
+        : ''
+    "
+    [ngClass]="[configProperties.styles.labelStyle ? configProperties.styles.labelStyle : '']">
+    {{ configProperties.displayName || 'Label' }}
+    <span class="ml-1 text-danger" *ngIf="isMandatory()">*</span>
+  </label>
+  <div [formGroup]="form">
+    <input
+      [placeholder]="configProperties.placeHolder || ' '"
+      type="number"
+      [formControlName]="configProperties.formControlName"
+      [id]="configProperties.type + configProperties.formControlName"
+      [readonly]="isReadOnly()"
+      (change)="onNumberChanged()"
+      (click)="onNumberChanged()"
+      [ngClass]="[
+        form.controls[configProperties.formControlName].invalid &&
+        form.controls[configProperties.formControlName].touched
+          ? 'validation-error-wrapper'
+          : '',
+        configProperties.styles.inputStyle ? configProperties.styles.inputStyle : '',
+      ]"
+      onkeydown="return(event.keyCode != 13)" />
+    <div *ngIf="configProperties.helpText">
+      <small
+        [ngClass]="[
+          configProperties.styles.supportingTextStyle
+            ? configProperties.styles.supportingTextStyle
+            : '',
+        ]">
+        {{ configProperties.helpText }}
+      </small>
+    </div>
+    <div
+      *ngIf="
+        form.controls[configProperties.formControlName].invalid &&
+        form.controls[configProperties.formControlName].touched
+      ">
+      <ng-container *ngIf="form.controls[configProperties.formControlName].errors?.['required']">
+        <p class="invalid-input-text">Please enter value</p>
+      </ng-container>
+      <ng-container *ngIf="form.controls[configProperties.formControlName].errors?.['min']">
+        <p class="invalid-input-text">Value below minimum</p>
+      </ng-container>
+      <ng-container *ngIf="form.controls[configProperties.formControlName].errors?.['max']">
+        <p class="invalid-input-text">Value above maximum</p>
+      </ng-container>
+    </div>
+  </div>
+</div>

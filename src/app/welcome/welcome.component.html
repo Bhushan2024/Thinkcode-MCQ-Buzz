@@ -1,0 +1,70 @@
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row"><div class="col-lg-12 color-black"></div></div>
+  <div class="row">
+    <div class="col-lg-3 color-black"></div>
+    <div class="col-lg-6 color-black">
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <title-h3-text [configProperties]="titleH3Text1ConfigProperties"></title-h3-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <text-input
+            [configProperties]="text12ConfigProperties"
+            [formValidation]="text12FormValidation"
+            (configPropertiesChanged)="text12Changed($event)"></text-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <text-input
+            [configProperties]="text23ConfigProperties"
+            [formValidation]="text23FormValidation"
+            (configPropertiesChanged)="text23Changed($event)"></text-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <email-input
+            [configProperties]="email1ConfigProperties"
+            [formValidation]="email1FormValidation"
+            (configPropertiesChanged)="email1Changed($event)"></email-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <password-input
+            [configProperties]="password1ConfigProperties"
+            [formValidation]="password1FormValidation"
+            (configPropertiesChanged)="password1Changed($event)"></password-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <text-input
+            [configProperties]="text34ConfigProperties"
+            [formValidation]="text34FormValidation"
+            (configPropertiesChanged)="text34Changed($event)"></text-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <dropdown
+            [configProperties]="dropdowns1ConfigProperties"
+            [formValidation]="dropdowns1FormValidation"
+            (configPropertiesChanged)="dropdowns1Changed($event)"></dropdown>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <button-component
+            [configProperties]="button1ConfigProperties"
+            (submitForm)="button1submitForm()"></button-component>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 color-black"></div>
+  </div>
+</div>

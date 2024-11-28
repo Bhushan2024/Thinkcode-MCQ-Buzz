@@ -1,0 +1,22 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <small
+    [ngClass]="[
+      configProperties.styles.supportingTextStyle
+        ? configProperties.styles.supportingTextStyle
+        : '',
+    ]">
+    {{ configProperties.value || 'p' }}
+  </small>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

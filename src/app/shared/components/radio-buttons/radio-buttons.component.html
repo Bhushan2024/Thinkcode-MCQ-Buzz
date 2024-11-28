@@ -1,0 +1,60 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <label
+    *ngIf="configProperties.showLabel"
+    [for]="configProperties.formControlName"
+    [style.color]="
+      form.controls[configProperties.formControlName].invalid &&
+      form.controls[configProperties.formControlName].touched
+        ? '#DA2D20 !important'
+        : ''
+    "
+    [ngClass]="[configProperties.styles.labelStyle ? configProperties.styles.labelStyle : '']">
+    {{ configProperties.displayName || 'Label' }}
+    <span class="ml-1 text-danger" *ngIf="isMandatory()">*</span>
+  </label>
+  <div [formGroup]="form">
+    <ng-container *ngFor="let option of configProperties.listOfOptions">
+      <input
+        [ngClass]="[
+          configProperties.styles.radioButtonStyle ? configProperties.styles.radioButtonStyle : '',
+        ]"
+        type="radio"
+        [formControlName]="configProperties.formControlName"
+        [readonly]="isReadOnly()"
+        [id]="configProperties.type + configProperties.formControlName"
+        (change)="onRadioButtonsChanged()"
+        (click)="onRadioButtonsChanged()"
+        [value]="option.value" />
+      <label
+        [ngClass]="[
+          configProperties.styles.radioButtonLabelStyle
+            ? configProperties.styles.radioButtonLabelStyle
+            : '',
+        ]"
+        [for]="configProperties.type + configProperties.formControlName"
+        >{{ option.displayName }}</label
+      >
+    </ng-container>
+    <div *ngIf="configProperties.helpText">
+      <small
+        [ngClass]="[
+          configProperties.styles.supportingTextStyle
+            ? configProperties.styles.supportingTextStyle
+            : '',
+        ]">
+        {{ configProperties.helpText }}
+      </small>
+    </div>
+    <div
+      *ngIf="
+        form.controls[configProperties.formControlName].invalid &&
+        form.controls[configProperties.formControlName].touched
+      ">
+      <ng-container *ngIf="form.controls[configProperties.formControlName].errors?.['required']">
+        <p class="invalid-input-text">Please enter value</p>
+      </ng-container>
+    </div>
+  </div>
+</div>
