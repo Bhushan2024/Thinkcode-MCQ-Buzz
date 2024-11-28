@@ -1,0 +1,72 @@
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row">
+    <div class="col-lg-12 color-black">
+      <div class="row">
+        <div class="col-lg-2 color-black">
+          <new-sidebar></new-sidebar>
+        </div>
+        <div class="col-lg-10 color-black">
+          <title-h3-text [configProperties]="titleH3Text12ConfigProperties"></title-h3-text
+          >
+          <!-- <div *ngFor="let cardConfig of cardsConfigProperties" class="col-lg-4 color-black"> -->
+          <card *ngFor="let cardConfig of cardsConfigProperties" [configProperties]="cardConfig.card1ConfigProperties" (cardClickedEvent)="card1Clicked()"
+           ><ng-template pTemplate="content"
+              ><subtitle-text [configProperties]="cardConfig.subtitleText45ConfigProperties"></subtitle-text
+              ><supporting-text
+                [configProperties]="cardConfig.supportingText1ConfigProperties"></supporting-text>
+              <div class="row margin-top-1rem">
+                <div class="col-lg-6 color-black">
+                  <supporting-text
+                    [configProperties]="cardConfig.supportingText34ConfigProperties"></supporting-text
+                  ><subtitle-text
+                    [configProperties]="cardConfig.subtitleText67ConfigProperties"></subtitle-text>
+                </div>
+                <div class="col-lg-6 color-black">
+                  <supporting-text
+                    [configProperties]="cardConfig.supportingText45ConfigProperties"></supporting-text
+                  ><subtitle-text
+                    [configProperties]="cardConfig.subtitleText78ConfigProperties"></subtitle-text>
+                </div>
+              </div>
+              <div class="row margin-top-1rem">
+                <div class="col-lg-6 color-black">
+                  <supporting-text
+                    [configProperties]="cardConfig.supportingText56ConfigProperties"></supporting-text
+                  ><subtitle-text
+                    [configProperties]="cardConfig.subtitleText89ConfigProperties"></subtitle-text>
+                </div>
+                <div class="col-lg-6 color-black">
+                  <supporting-text
+                    [configProperties]="cardConfig.supportingText68ConfigProperties"></supporting-text
+                  ><subtitle-text
+                    [configProperties]="cardConfig.subtitleText911ConfigProperties"></subtitle-text>
+                </div>
+                <div class="col-lg-6 color-black">
+                  <supporting-text
+                    [configProperties]="cardConfig.supportingText67ConfigProperties"></supporting-text
+                  ><subtitle-text
+                    [configProperties]="cardConfig.subtitleText910ConfigProperties"></subtitle-text>
+                </div>
+              </div>
+              <button-component
+                [configProperties]="cardConfig.button1ConfigProperties"
+                (submitForm)="button1submitForm(cardConfig.button1ConfigProperties.propertyName)"></button-component></ng-template
+          ></card>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #popup8Template
+    ><subtitle-text [configProperties]="subtitleText454ConfigProperties"></subtitle-text
+    ><subtitle-text [configProperties]="subtitleText476ConfigProperties"></subtitle-text
+    ><subtitle-text [configProperties]="subtitleText487ConfigProperties"></subtitle-text
+    ><list
+      [configProperties]="list11ConfigProperties"
+      (configPropertiesChanged)="list11Changed($event)"></list
+    ><button-component
+      [configProperties]="button111ConfigProperties"
+      (submitForm)="button111submitForm()"></button-component
+  ></ng-template>
+</div>

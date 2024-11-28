@@ -1,0 +1,32 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <p
+    [ngClass]="[
+      configProperties.styles.copyrightTextStyle ? configProperties.styles.copyrightTextStyle : '',
+    ]">
+    &copy;&nbsp;{{
+      configProperties.copyrightYear.length ? configProperties.copyrightYear : year
+    }}
+    &nbsp;
+    <a
+      [ngClass]="[
+        configProperties.styles.copyrightLinkStyle
+          ? configProperties.styles.copyrightLinkStyle
+          : '',
+      ]"
+      [href]="configProperties.copyrightLink"
+      >{{ configProperties.copyrightName }}</a
+    >. All rights reserved
+  </p>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

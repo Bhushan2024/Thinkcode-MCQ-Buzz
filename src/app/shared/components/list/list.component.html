@@ -1,0 +1,48 @@
+<div
+  [ngClass]="[configProperties.styles.componentStyle ? configProperties.styles.componentStyle : '']"
+  [hidden]="configProperties.isHidden">
+  <ng-container *ngIf="!isOrderedList">
+    <ul
+      *ngIf="!configProperties.dropDisplayName"
+      (click)="onListChanged()"
+      (change)="onListChanged()">
+      <li
+        [ngClass]="[configProperties.styles.listStyle ? configProperties.styles.listStyle : '']"
+        *ngFor="let child of configProperties.listChilds; let i = index"
+        [style.list-style-type]="configProperties.value">
+        <span> {{ child }}</span>
+      </li>
+    </ul>
+    <ul
+      *ngIf="configProperties.dropDisplayName"
+      (click)="onListChanged()"
+      (change)="onListChanged()">
+      <li
+        *ngFor="let child of configProperties.listChilds; let i = index"
+        [style.list-style-type]="configProperties.value"
+        [ngClass]="[configProperties.styles.listStyle ? configProperties.styles.listStyle : '']">
+        <span> {{ child }}</span>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="isOrderedList">
+    <ul (click)="onListChanged()" (change)="onListChanged()">
+      <li
+        *ngFor="let child of configProperties.listChilds; let i = index"
+        [style.list-style-type]="configProperties.value"
+        [ngClass]="[configProperties.styles.listStyle ? configProperties.styles.listStyle : '']">
+        <span> {{ child }}</span>
+      </li>
+    </ul>
+  </ng-container>
+  <div *ngIf="configProperties.helpText">
+    <small
+      [ngClass]="[
+        configProperties.styles.supportingTextStyle
+          ? configProperties.styles.supportingTextStyle
+          : '',
+      ]">
+      {{ configProperties.helpText }}
+    </small>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+/* Reset margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Main content takes remaining space */
+  .content {
+    flex: 1;
+  }
+  
+  /* Footer styling */
+  .footer {
+    background-color: #f8f9fa; /* Light grey background */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #6c757d; /* Slightly darker grey text */
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+  }
+  

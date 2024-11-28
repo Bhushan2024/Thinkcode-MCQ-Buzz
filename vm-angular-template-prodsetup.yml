@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+      - master  
+
+pool:
+  name: KaviVMPool  
+  demands:
+  - agent.name -equals agent1
+
+steps:
+- checkout: self
+  persistCredentials: true
+  clean: true
+  displayName: 'Checkout code from repository using service connection'
+
+- powershell: |
+    Write-Host "Current directory: $(System.DefaultWorkingDirectory)"
+    Write-Host "Listing contents of C:\Users\kavi-server\Documents\AngularProduction directory:"
+    Get-ChildItem -Path 'C:\Users\kavi-server\Documents\AngularProduction'
+  displayName: 'Debug - List directory contents of Angular directory'
+
+- powershell: |
+    if (Test-Path 'C:\Users\kavi-server\Documents\AngularProduction\ang-build-and-link.ps1') {
+      Write-Host "File exists: C:\Users\kavi-server\Documents\AngularProduction\ang-build-and-link.ps1"
+    } else {
+      Write-Host "File does not exist: C:\Users\kavi-server\Documents\AngularProduction\ang-build-and-link.ps1"
+    }
+  displayName: 'Debug - Check if PowerShell script exists'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'filePath'
+    filePath: 'C:\\Users\\kavi-server\\Documents\\AngularProduction\\ang-build-and-link.ps1'
+    arguments: '-root C:\\Users\\kavi-server\\Documents\\AngularProduction\\kavi2-angular-template -pat $(pat)'
+  displayName: 'Run PowerShell script on VM'
