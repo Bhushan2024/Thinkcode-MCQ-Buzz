@@ -1667,7 +1667,7 @@ export class ExamQuestionComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50 margin-top-5rem',
         cardBodyStyle:
-          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-width-1 border-style-dotted border-color-000000 border-radius-4',
+          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-width-1 border-style-dotted border-color-000000 border-radius-4 p-3',
       },
       isHidden: false,
       propertyName: '827601a4-cbea-483c-b04a-69babec86704',

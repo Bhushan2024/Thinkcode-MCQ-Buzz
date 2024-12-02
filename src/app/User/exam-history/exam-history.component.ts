@@ -186,7 +186,7 @@ export class ExamHistoryComponent implements OnInit {
         componentStyle: 'margin-top-5-percent',
         supportingTextStyle: 'color-6c757d',
         buttonStyle:
-          'border-radius-4 border-width-1 background-color-rgb74-21-72-1 font-size-16 font-weight-400 color-rgb255-255-255-1 margin-left-1-percent p-1 margin-top-5-percent',
+          'border-radius-4 border-width-1 background-color-rgb74-21-72-1 font-size-16 font-weight-400 color-rgb255-255-255-1 margin-left-1-percent px-2 margin-top-5-percent',
       },
       isHidden: false,
       propertyName: 'ae65213c-a0e9-4dac-aeea-247202d31f1f',
@@ -211,7 +211,7 @@ export class ExamHistoryComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50',
         cardBodyStyle:
-          'margin-top-2rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-style-dotted border-width-1 border-color-000000 border-radius-08rem p-2',
+          'margin-top-2rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-style-dotted border-width-1 border-color-000000 border-radius-08rem p-2 m-3',
       },
       isHidden: false,
       propertyName: 'bf18c6d0-c2a0-479b-a0df-6b04cfd31cb2',

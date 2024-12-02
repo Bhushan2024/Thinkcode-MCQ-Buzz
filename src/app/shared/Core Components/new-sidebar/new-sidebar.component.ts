@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'new-sidebar',
@@ -10,7 +11,7 @@ export class NewSidebarComponent implements OnInit {
   public button21ConfigProperties: any;
   public button22ConfigProperties: any;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.subtitleText11ConfigProperties = {
@@ -87,6 +88,10 @@ export class NewSidebarComponent implements OnInit {
     };
   }
 
-  button21submitForm() {}
-  button22submitForm() {}
+  button21submitForm() {
+    this.router.navigate(['/exams'])
+  }
+  button22submitForm() {
+    this.router.navigate(['/exam-history'])
+  }
 }
