@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forEach } from 'lodash';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { forkJoin } from 'rxjs';
 import { ExamService } from 'src/app/Service/exam.service';
 import { UserAnswerService } from 'src/app/Service/user-answer.service';
 
@@ -1932,6 +1933,8 @@ goToNextSection() {
       {
         next:(response)=>{
           console.log(`Result has been calculated`, response);
+          // Navigate to exam history
+          this.router.navigate(['/exam-history']);
         },
         error:(error)=>{
           console.error(`Error while calculating the result`,error);
@@ -1979,26 +1982,31 @@ goToNextSection() {
   }
 
   submitExam() {
-    var userExamId:number=0;
-    this.addUserAnswer()
-    this.exam.sectionExams.forEach((section:any) => {
-    userExamId = parseInt(sessionStorage.getItem('userExam') || '0', 10); // Ensure safe conversion
-      if (userExamId > 0) { // Only proceed if userExamId is valid
-        console.log(userExamId)
-        this.examService.GenerateSectionResult(section.sectionId, userExamId).subscribe(
-          (response) => {
-            this.router.navigate(['/exam-history'])
-            console.log(`Result for section ${section.sectionId}:`, response);
-          },
-          (error) => {
-            console.error(`Error generating result for section ${section.sectionId}:`, error);
-          }
-        );
-      } else {
-        console.error('Invalid userExamId from session storage');
-      }
-    });
-    this.calculateAndCreateExamResult(userExamId)
+    const userExamId: number = parseInt(sessionStorage.getItem('userExam') || '0', 10);
+
+    if (userExamId > 0) {
+      this.addUserAnswer();
+
+      // Create an array of observables for all sections
+      const sectionRequests = this.exam.sectionExams.map((section: any) =>
+        this.examService.GenerateSectionResult(section.sectionId, userExamId)
+      );
+
+      // Use forkJoin to execute all API requests in parallel
+      forkJoin(sectionRequests).subscribe({
+        next: (responses) => {
+          console.log('All section results generated:', responses);
+
+          // After all section results are processed, calculate and create the final exam result
+          this.calculateAndCreateExamResult(userExamId);
+        },
+        error: (error) => {
+          console.error('Error generating section results:', error);
+        }
+      });
+    } else {
+      console.error('Invalid userExamId from session storage');
+    }
   }
 
   ngOnDestroy() {

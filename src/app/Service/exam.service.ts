@@ -60,6 +60,7 @@ export class ExamService {
   }
 
   CalculateAndCreateExamResult(userExamId:number){
+    console.log('lefhvfkjehv')
     const url = this.buildUrl(`v1/ExamResult/CalculateAndCreateExamResult?userExamId=${encodeURIComponent(userExamId)}`);
     return this.http.get(url,{headers: this.getHeaders()})
   }
