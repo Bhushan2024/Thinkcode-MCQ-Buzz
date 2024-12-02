@@ -1347,9 +1347,9 @@ export class UpcomingExamsComponent implements OnInit {
       helpText: '',
       styles: {
         supportingTextStyle: 'color-6c757d',
-        cardComponentStyle: 'height-50 margin-top-3rem width-50-percent',
+        cardComponentStyle: 'height-50 margin-top-3rem',
         cardBodyStyle:
-          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-style-dotted border-color-rgb130-130-130-1 border-radius-05rem border-width-0005rem p-1',
+          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-style-dotted border-color-rgb130-130-130-1 border-radius-05rem border-width-0005rem p-3',
       },
       isHidden: false,
       propertyName: exam.examId,
@@ -1365,7 +1365,7 @@ export class UpcomingExamsComponent implements OnInit {
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        headingTextStyle: 'color-black margin-top-5rem font-weight-600',
+        headingTextStyle: 'color-black margin-top-5rem font-weight-600 decoration-underline',
       },
       isHidden: false,
       propertyName: `titleh3_${exam.examId}`,
@@ -1387,7 +1387,7 @@ export class UpcomingExamsComponent implements OnInit {
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        subtitleTextStyle: 'color-black font-weight-600',
+        subtitleTextStyle: 'color-black font-weight-600 font-size-1rem',
       },
       isHidden: false,
       propertyName: `subtitle_${exam.examId}`,

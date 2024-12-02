@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd, Event  } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'initial-navbar',
@@ -12,10 +13,19 @@ export class InitialNavbarComponent implements OnInit {
   public subtitleText33ConfigProperties: any;
   public button1ConfigProperties: any;
   public button12ConfigProperties: any;
+  public hideElementForSpecificRoute: boolean = false;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.router.events
+      .pipe(
+        filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+      )
+      .subscribe((event: NavigationEnd) => {
+        // Hide elements for 'exam-question' route
+        this.hideElementForSpecificRoute = event.url.includes('/exam-question');
+      });
     this.titleH3Text12ConfigProperties = {
       helpText: '',
       styles: {

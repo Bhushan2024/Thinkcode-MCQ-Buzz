@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserResultService } from 'src/app/Service/user-result.service';
 
 @Component({
   selector: 'exam-history',
@@ -11,20 +12,26 @@ export class ExamHistoryComponent implements OnInit {
   public subtitleText237ConfigProperties: any;
   public subtitleText248ConfigProperties: any;
   public subtitleText259ConfigProperties: any;
+  public subtitleText260ConfigProperties: any;
   public subtitleText2610ConfigProperties: any;
   public subtitleText2711ConfigProperties: any;
   public button99ConfigProperties: any;
   public card21ConfigProperties: any;
+  public cardConfigProperties:any[]=[]
+  public userResults:any[]=[]
+  public userId:any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userResultService: UserResultService) {}
 
   ngOnInit() {
+    this.userId= localStorage.getItem('currentUserId')
+    this.getExamResults()
     this.titleH3Text21ConfigProperties = {
       helpText: '',
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        headingTextStyle: 'color-black font-weight-600 margin-top-5rem',
+        headingTextStyle: 'color-black font-weight-600 margin-top-5rem decoration-underline',
       },
       isHidden: false,
       propertyName: '6ec6f012-53bb-4507-a77a-a18ba7b4f161',
@@ -46,7 +53,7 @@ export class ExamHistoryComponent implements OnInit {
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        subtitleTextStyle: 'color-rgb103-101-101-1 font-size-12rem font-weight-600',
+        subtitleTextStyle: 'color-rgb103-101-101-1 font-size-12rem font-weight-600 ',
       },
       isHidden: false,
       propertyName: 'ffc698e7-078f-4a09-b43a-56120f846ec1',
@@ -107,6 +114,28 @@ export class ExamHistoryComponent implements OnInit {
       variableName: 'subtitleText259ConfigProperties',
       listOfOptions: [],
     };
+    this.subtitleText260ConfigProperties = {
+      helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb130-130-130-1',
+      },
+      isHidden: false,
+      propertyName: '107bc030-d7e1-440e-a8f7-4e3703b893c2',
+      showLabel: false,
+      type: 'subtitle-text',
+      value: 'Total Marks: 20',
+      formControlName: 'subtitleText259FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText259ConfigProperties',
+      listOfOptions: [],
+    };
     this.subtitleText2610ConfigProperties = {
       helpText: '',
       styles: {
@@ -157,7 +186,7 @@ export class ExamHistoryComponent implements OnInit {
         componentStyle: 'margin-top-5-percent',
         supportingTextStyle: 'color-6c757d',
         buttonStyle:
-          'border-radius-4 border-width-1 background-color-rgb74-21-72-1 font-size-16 font-weight-400 color-rgb255-255-255-1 margin-left-1-percent p-1',
+          'border-radius-4 border-width-1 background-color-rgb74-21-72-1 font-size-16 font-weight-400 color-rgb255-255-255-1 margin-left-1-percent p-1 margin-top-5-percent',
       },
       isHidden: false,
       propertyName: 'ae65213c-a0e9-4dac-aeea-247202d31f1f',
@@ -182,7 +211,7 @@ export class ExamHistoryComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50',
         cardBodyStyle:
-          'margin-top-2rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 width-25-percent border-width-1 border-style-dotted border-color-000000 border-radius-08rem p-1',
+          'margin-top-2rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-style-dotted border-width-1 border-color-000000 border-radius-08rem p-2',
       },
       isHidden: false,
       propertyName: 'bf18c6d0-c2a0-479b-a0df-6b04cfd31cb2',
@@ -592,8 +621,165 @@ export class ExamHistoryComponent implements OnInit {
     };
   }
 
+  updateConfigProperties(){
+    this.cardConfigProperties= this.userResults.map((exam)=>({
+
+      subtitleText237ConfigProperties:{
+        helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb103-101-101-1 font-size-12rem font-weight-600',
+      },
+      isHidden: false,
+      propertyName: 'ffc698e7-078f-4a09-b43a-56120f846ec1',
+      showLabel: false,
+      type: 'subtitle-text',
+      value: exam.examName,
+      formControlName: 'subtitleText237FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText237ConfigProperties',
+      listOfOptions: []
+      },
+      subtitleText248ConfigProperties:{
+        helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb130-130-130-1',
+      },
+      isHidden: false,
+      propertyName: '4e39ebbb-3046-4b5e-bee8-0953bf4ddd07',
+      showLabel: false,
+      type: 'subtitle-text',
+      value:'Score: '+ exam.obtainedMarks,
+      formControlName: 'subtitleText248FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText248ConfigProperties',
+      listOfOptions: []
+      },
+     subtitleText259ConfigProperties:{
+        helpText: '',
+        styles: {
+          componentStyle: '',
+          supportingTextStyle: 'color-6c757d',
+          subtitleTextStyle: 'color-rgb130-130-130-1',
+        },
+        isHidden: false,
+        propertyName: '107bc030-d7e1-440e-a8f7-4e3703b893c2',
+        showLabel: false,
+        type: 'subtitle-text',
+        value:'Passing Marks: '+ exam.passingMarks,
+        formControlName: 'subtitleText259FormControl',
+        navigateTo: '',
+        customCssClasses: [],
+        childs: [],
+        icon: 'faText',
+        listChilds: [],
+        styleType: '',
+        variableName: 'subtitleText259ConfigProperties',
+        listOfOptions: []
+      },
+      subtitleText260ConfigProperties:{
+        helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb130-130-130-1',
+      },
+      isHidden: false,
+      propertyName: '107bc030-d7e1-440e-a8f7-4e3703b893c2',
+      showLabel: false,
+      type: 'subtitle-text',
+      value:'Total Marks: '+ exam.totalMarks,
+      formControlName: 'subtitleText259FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText259ConfigProperties',
+      listOfOptions: []
+      },
+      subtitleText2610ConfigProperties:{
+        helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb130-130-130-1',
+      },
+      isHidden: false,
+      propertyName: 'bb8beaa6-cd8c-417b-87c4-c053fd28777b',
+      showLabel: false,
+      type: 'subtitle-text',
+      value:'Status: '+exam.resultStatus,
+      formControlName: 'subtitleText2610FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText2610ConfigProperties',
+      listOfOptions: []
+      },
+      subtitleText2711ConfigProperties:{
+        helpText: '',
+      styles: {
+        componentStyle: '',
+        supportingTextStyle: 'color-6c757d',
+        subtitleTextStyle: 'color-rgb130-130-130-1',
+      },
+      isHidden: false,
+      propertyName: '1baa05d4-9288-4492-ba03-afaa1f774def',
+      showLabel: false,
+      type: 'subtitle-text',
+      value:'Result Date: '+ new Date(exam.resultDate).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+      formControlName: 'subtitleText2711FormControl',
+      navigateTo: '',
+      customCssClasses: [],
+      childs: [],
+      icon: 'faText',
+      listChilds: [],
+      styleType: '',
+      variableName: 'subtitleText2711ConfigProperties',
+      listOfOptions: []
+      }
+    }))
+  }
+  
+
   button99submitForm() {
     this.router.navigate(['/exam-results'])
+  }
+
+  getExamResults(){
+   this.userResultService.getUserResults(this.userId).subscribe({
+    next:(response)=>{
+      console.log(response)
+     this.userResults= response
+     console.log(this.userResults)
+     this.updateConfigProperties()
+    },
+    error:(error)=>{
+     error("Error while fetching the user results",error)
+    }
+   })
   }
   card21Clicked() {}
 }

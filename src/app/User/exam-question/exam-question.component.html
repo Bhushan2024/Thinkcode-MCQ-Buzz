@@ -4,13 +4,22 @@
     <div class="col-lg-12 color-black">
       <div class="row mt-3 p-3">
         <div class="col-lg-3 color-black p-1">
-          <subtitle-text [configProperties]="subtitleText101ConfigProperties"></subtitle-text>
+          <subtitle-text [configProperties]="cardsConfigProperties.subtitleText101ConfigProperties"></subtitle-text>
         </div>
         <div class="col-lg-6 color-black p-1">
           <subtitle-text [configProperties]="cardsConfigProperties.subtitleText123ConfigProperties"></subtitle-text>
         </div>
-        <div class="col-lg-3 color-black p-1">
+        <!-- <div class="col-lg-3 color-black p-1">
           <subtitle-text [configProperties]="cardsConfigProperties.subtitleText112ConfigProperties"></subtitle-text>
+        </div> -->
+        <div *ngIf="!isLoading">
+          <h2>Exam Timer</h2>
+          <p>
+            Time Remaining: 
+            <span>
+              {{ examDuration - (minutes + 1) }}:{{59 - seconds < 10 ? '0' + (59 - seconds) :59 - seconds }}
+            </span>
+          </p>
         </div>
       </div>
       <div class="row">
@@ -42,20 +51,28 @@
                 (configPropertiesChanged)="radioButtons15Changed($event)"></radio-buttons
               > -->
               <div *ngFor="let option of exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].options">
-                <label>
+                <label *ngIf="!exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].isMultipleChoice">
                   <input 
-                  type="radio" 
-                  [name]="'question_' + currentQuestionIndex" 
-                  [value]="option.optionId" 
-                  [(ngModel)]="selectedOption"
-                    >
+                    type="radio" 
+                    [name]="'question_' + currentQuestionIndex" 
+                    [value]="option.optionId" 
+                    [(ngModel)]="selectedOption">
                   {{ option.optionText }}
                 </label>
-              </div>
-              <check-box *ngIf="exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].isMultipleChoice"
+                <label *ngIf="exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].isMultipleChoice">
+                  <input 
+      type="checkbox" 
+      [value]="option.optionId" 
+      (change)="onCheckboxChange($event, option.optionId)" 
+      [checked]="isOptionSelected(option.optionId)"
+    >
+    {{ option.optionText }}
+                </label>
+              </div>              
+              <!-- <check-box *ngIf="exam.sectionExams[currentSectionIndex].questions[currentQuestionIndex].isMultipleChoice"
                 [configProperties]="checkBox1ConfigProperties"
                 [formValidation]="checkBox1FormValidation"
-                (configPropertiesChanged)="checkBox1Changed($event)"></check-box>
+                (configPropertiesChanged)="checkBox1Changed($event)"></check-box> -->
               <div class="row margin-top-2-percent">
                 <div class="col-lg-3 color-black">
                   <button-component

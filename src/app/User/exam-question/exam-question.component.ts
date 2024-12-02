@@ -55,10 +55,16 @@ export class ExamQuestionComponent implements OnInit {
   public sectionQuestions:any[]=[]
   public sectionConfigs:any[]=[]
   public questionConfigs :any[]=[]
-  
+  public selectedOptions:any[]=[];
+  remainingTime : number=0;
+  timer: any;
+  minutes: number = 0;
+  seconds: number = 0;
+  examDuration: number = 0; // To be fetched from the backend
+  private interval: any;
+  isLoading: boolean = true; 
 
   ngOnInit() {
-    
     this.route.queryParams.subscribe(params => {
       if (params['examId']) {
         console.log('Query params data:', params['examId']);
@@ -1350,7 +1356,7 @@ export class ExamQuestionComponent implements OnInit {
       propertyName: 'd75e161b-ab0c-4ed4-8f30-bbe2f1f58738',
       showLabel: false,
       type: 'subtitle-text',
-      value: 'viraj@gmail.com',
+      value: sessionStorage.getItem('email'),
       formControlName: 'subtitleText101FormControl',
       navigateTo: '',
       customCssClasses: [],
@@ -1661,7 +1667,7 @@ export class ExamQuestionComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50 margin-top-5rem',
         cardBodyStyle:
-          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-width-1 border-style-dotted border-color-000000 border-radius-4 p-1',
+          'box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 border-width-1 border-style-dotted border-color-000000 border-radius-4',
       },
       isHidden: false,
       propertyName: '827601a4-cbea-483c-b04a-69babec86704',
@@ -1794,6 +1800,10 @@ export class ExamQuestionComponent implements OnInit {
     next:(response)=>{
      this.exam= response.data
      console.log(this.exam)
+     this.examDuration= this.exam.duration
+     this.updateTimerDisplay()
+     this.startStopwatch();
+      this.isLoading = false;
      this.examSections = this.exam.sectionExams;
      this.updateConfigProperties()
      console.log(this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].options)
@@ -1878,51 +1888,43 @@ goToNextSection() {
   button55submitForm() {}
   button122submitForm() {}
 
-  addUserAnswer(){
-
-    const selectedOptions:any[]=[]
-    selectedOptions.push(this.selectedOption)
-    console.log(this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].questionId)
-    const payload={
-        questionId: this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].questionId,
-        userExamId: sessionStorage.getItem('userExam'),
-        sectionId: this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].sectionId,
-        optionIds: selectedOptions
+  addUserAnswer() {
+    let selectedOptions: any[] = [];
+  
+    // For single-choice questions (radio buttons)
+    if (!this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].isMultipleChoice) {
+      selectedOptions.push(this.selectedOption);
     }
-    console.log(payload)
-    this.userAnswerService.AddUserAnswer(payload).subscribe(
-      {
-        next: (response)=>{
-         console.log("User answer has been added")
-        },
-        error: (error)=>{
-          console.error("Error while adding user answer", error)
-        }
-      }
-    )
+  
+    // For multiple-choice questions (checkboxes)
+    if (this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].isMultipleChoice) {
+      selectedOptions = this.selectedOptions; // Assume `selectedOptions` holds array of selected checkboxes
+    }
+  
+    // Build the payload
+    const payload = {
+      questionId: this.exam.sectionExams[this.currentSectionIndex].questions[this.currentQuestionIndex].questionId,
+      userExamId: sessionStorage.getItem('userExam'),
+      sectionId: this.exam.sectionExams[this.currentSectionIndex].sectionId,
+      optionIds: selectedOptions,
+    };
+  
+    console.log('Payload:', payload);
+  
+    // Call the service to save the answer
+    this.userAnswerService.AddUserAnswer(payload).subscribe({
+      next: (response) => {
+        console.log('User answer has been added:', response);
+      },
+      error: (error) => {
+        console.error('Error while adding user answer:', error);
+      },
+    });
   }
+  
 
   button99submitForm(){
-    var userExamId:number=0;
-    this.addUserAnswer()
-    this.exam.sectionExams.forEach((section:any) => {
-    userExamId = parseInt(sessionStorage.getItem('userExam') || '0', 10); // Ensure safe conversion
-      if (userExamId > 0) { // Only proceed if userExamId is valid
-        console.log(userExamId)
-        this.examService.GenerateSectionResult(section.sectionId, userExamId).subscribe(
-          (response) => {
-            this.router.navigate(['/exam-results'])
-            console.log(`Result for section ${section.sectionId}:`, response);
-          },
-          (error) => {
-            console.error(`Error generating result for section ${section.sectionId}:`, error);
-          }
-        );
-      } else {
-        console.error('Invalid userExamId from session storage');
-      }
-    });
-    this.calculateAndCreateExamResult(userExamId)
+    this.submitExam()
   }
 
   calculateAndCreateExamResult(userExamId:number){
@@ -1936,5 +1938,75 @@ goToNextSection() {
         }
       }
     )
+  }
+
+  onCheckboxChange(event: Event, optionId: number): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+  
+    if (isChecked) {
+      // Add option to selected options
+      this.selectedOptions.push(optionId);
+    } else {
+      // Remove option from selected options
+      this.selectedOptions = this.selectedOptions.filter(id => id !== optionId);
+    }
+    console.log('Selected Options:', this.selectedOptions);
+  }
+
+  isOptionSelected(optionId: number): boolean {
+    return this.selectedOptions.includes(optionId);
+  }
+  
+  startStopwatch() {
+    this.interval = setInterval(() => {
+      if (this.seconds < 59) {
+        this.seconds++;
+      } else {
+        this.seconds = 0;
+        this.minutes++;
+      }
+
+      // Check if the time is up
+      if (this.minutes === this.examDuration) {
+        this.stopStopwatch();
+        this.submitExam();
+      }
+    }, 1000);
+  }
+
+  stopStopwatch() {
+    clearInterval(this.interval);
+  }
+
+  submitExam() {
+    var userExamId:number=0;
+    this.addUserAnswer()
+    this.exam.sectionExams.forEach((section:any) => {
+    userExamId = parseInt(sessionStorage.getItem('userExam') || '0', 10); // Ensure safe conversion
+      if (userExamId > 0) { // Only proceed if userExamId is valid
+        console.log(userExamId)
+        this.examService.GenerateSectionResult(section.sectionId, userExamId).subscribe(
+          (response) => {
+            this.router.navigate(['/exam-history'])
+            console.log(`Result for section ${section.sectionId}:`, response);
+          },
+          (error) => {
+            console.error(`Error generating result for section ${section.sectionId}:`, error);
+          }
+        );
+      } else {
+        console.error('Invalid userExamId from session storage');
+      }
+    });
+    this.calculateAndCreateExamResult(userExamId)
+  }
+
+  ngOnDestroy() {
+    this.stopStopwatch();
+  }
+
+  updateTimerDisplay() {
+    this.minutes = Math.floor(this.seconds / 60);
+    this.seconds = this.seconds % 60;
   }
 }

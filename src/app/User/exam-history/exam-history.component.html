@@ -8,18 +8,22 @@
         </div>
         <div class="col-lg-10 color-black">
           <title-h3-text [configProperties]="titleH3Text21ConfigProperties"></title-h3-text
-          ><card [configProperties]="card21ConfigProperties" (cardClickedEvent)="card21Clicked()"
-            ><ng-template pTemplate="content"
-              ><subtitle-text [configProperties]="subtitleText237ConfigProperties"></subtitle-text
-              ><subtitle-text [configProperties]="subtitleText248ConfigProperties"></subtitle-text
-              ><subtitle-text [configProperties]="subtitleText259ConfigProperties"></subtitle-text
-              ><subtitle-text [configProperties]="subtitleText2610ConfigProperties"></subtitle-text
-              ><subtitle-text [configProperties]="subtitleText2711ConfigProperties"></subtitle-text
+          >
+          <div class="d-flex col-md-10" >
+          <card [configProperties]="card21ConfigProperties" (cardClickedEvent)="card21Clicked()"
+          *ngFor="let config of cardConfigProperties"><ng-template pTemplate="content"
+              ><subtitle-text [configProperties]="config.subtitleText237ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="config.subtitleText248ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="config.subtitleText259ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="config.subtitleText260ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="config.subtitleText2610ConfigProperties"></subtitle-text
+              ><subtitle-text [configProperties]="config.subtitleText2711ConfigProperties"></subtitle-text
               >
               <button-component
                 [configProperties]="button99ConfigProperties"
                 (submitForm)="button99submitForm()"></button-component></ng-template
           ></card>
+        </div>
         </div>
       </div>
     </div>

@@ -152,6 +152,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUserRole', response.role);
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('currentUserId', response.userId);
+        sessionStorage.setItem('email', response.email)
 
         // Redirect based on role
         if (response.role === 'Student') {
