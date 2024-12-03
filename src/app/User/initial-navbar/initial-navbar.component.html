@@ -7,24 +7,37 @@
         <div class="col-lg-2 color-black">
           <title-h3-text [configProperties]="titleH3Text12ConfigProperties"></title-h3-text>
         </div>
-        <div class="col-lg-6 color-black"></div>
-        <div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForSpecificRoute">
+        <div [ngClass]="divClass" class="color-black"></div>
+        <div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForCore">
+          <subtitle-text [configProperties]="subtitleText44ConfigProperties"></subtitle-text>
+        </div>
+        <div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForCore">
+          <subtitle-text [configProperties]="subtitleText55ConfigProperties"></subtitle-text>
+        </div><div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForStudentRoute">
+          <subtitle-text [configProperties]="subtitleText66ConfigProperties"></subtitle-text>
+        </div><div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForSpecificRoute">
           <subtitle-text [configProperties]="subtitleText22ConfigProperties"></subtitle-text>
         </div>
         <div class="col-lg-1 color-black align-content-center" *ngIf="!hideElementForSpecificRoute">
           <subtitle-text [configProperties]="subtitleText33ConfigProperties"></subtitle-text>
         </div>
-        <div class="col-lg-1 color-black align-content-center">
+        <div class="col-lg-1 color-black align-content-center" *ngIf="showElementForSignup">
           <button-component
-          *ngIf="!hideElementForSpecificRoute"
+          
             [configProperties]="button1ConfigProperties"
             (submitForm)="button1submitForm()"></button-component>
         </div>
-        <div class="col-lg-1 color-black align-content-center">
+        <div class="col-lg-1 color-black align-content-center" *ngIf="showElementForLogin">
           <button-component
-          *ngIf="!hideElementForSpecificRoute"
+          
             [configProperties]="button12ConfigProperties"
             (submitForm)="button12submitForm()"></button-component>
+        </div>
+        <div class="col-lg-1 color-black align-content-center" *ngIf="!showElementForSpecificRoute">
+          <button-component
+          
+            [configProperties]="button13ConfigProperties"
+            (submitForm)="button13submitForm()"></button-component>
         </div>
       </div>
     </div>

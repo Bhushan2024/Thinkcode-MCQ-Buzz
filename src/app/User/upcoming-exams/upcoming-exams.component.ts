@@ -52,7 +52,7 @@ export class UpcomingExamsComponent implements OnInit {
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        headingTextStyle: 'color-black margin-top-5rem font-weight-600',
+        headingTextStyle: 'color-black margin-top-5rem font-weight-600 decoration-underline',
       },
       isHidden: false,
       propertyName: '55ee05f8-04b8-4012-901a-e481da9db64d',
@@ -1676,7 +1676,7 @@ export class UpcomingExamsComponent implements OnInit {
   getAllExams(){
   this.examService.GetAllExams().subscribe({
    next:(response)=>{    
-      this.exams = response.data
+      this.exams = response.data.filter((exam: any) => exam.isActive);
       console.log(this.exams)
       this.updateConfigProperties();
     },

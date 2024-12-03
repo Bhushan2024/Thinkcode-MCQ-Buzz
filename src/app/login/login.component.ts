@@ -156,6 +156,7 @@ export class LoginComponent implements OnInit {
 
         // Redirect based on role
         if (response.role === 'Student') {
+          console.log('Student')
           this.router.navigate(['/student-dashboard']);
         } else if (response.role === 'Teacher') {
           this.router.navigate(['/admin-dashboard']);
