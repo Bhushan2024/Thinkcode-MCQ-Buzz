@@ -252,8 +252,8 @@ export class AdminResultComponent implements OnInit {
       };
       const percentage = {
         ...this.titleH3Text12ConfigProperties,
-        value: `${item.overallPassStudentsPercentage}%`|| 'Default',
-      };
+        value: `${(item.overallPassStudentsPercentage || 0).toFixed(2)}%` || 'Default',
+      };      
       const passedStudent = {
         ...this.subtitleText14ConfigProperties,
         value: `Passed Student: ${item.passedStudents}`,
@@ -295,6 +295,6 @@ export class AdminResultComponent implements OnInit {
   }
   linkText1Changed(event: any) {
     this.linkText1ConfigProperties = event;
-    console.log("You have checked for exam Id: "+event)
+    this.router.navigate(['/detailed-results', event]);
   }
 }

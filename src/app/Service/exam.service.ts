@@ -56,9 +56,9 @@ export class ExamService {
     const url = this.buildUrl('v1/Question/addQuestionWithOptions');
     return this.http.post<any>(url, JSON.stringify(QuestionData), { headers: this.getHeaders() });
   }
-  // addQuestionWithOptions(payload: any): Observable<HttpResponse<any>> {
-  //   // Observe the full HTTP response
-  //   return this.http.post<any>(this.apiUrl, payload, { observe: 'response' });
-  // }
+  GetExamResultsByExamId(ExamId: any): Observable<HttpResponse<any>> {
+    const url = this.buildUrl('v1/ExamResult/GetExamResultsByExamId');
+    return this.http.post<any>(url, ExamId, { headers: this.getHeaders() });
+  }
   
 }

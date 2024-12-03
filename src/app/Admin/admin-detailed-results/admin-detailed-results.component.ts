@@ -1,6 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { PopupComponent } from '../shared/components/popup/popup.component';
+import { PopupComponent } from '../../shared/components/popup/popup.component';
+import { Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ExamService } from 'src/app/Service/exam.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'admin-detailed-results',
@@ -8,6 +12,7 @@ import { PopupComponent } from '../shared/components/popup/popup.component';
   styleUrls: ['./admin-detailed-results.component.scss'],
 })
 export class AdminDetailedResultsComponent implements OnInit {
+  @Input() examId!: any;
   public titleH3Text13ConfigProperties: any;
   public dataGrid1ConfigProperties: any;
   public dataGrid1InterfaceConfig: any;
@@ -17,10 +22,17 @@ export class AdminDetailedResultsComponent implements OnInit {
   public subtitleText110ConfigProperties: any;
   public subtitleText112ConfigProperties: any;
   public subtitleText11ConfigProperties: any;
+  public examresults: any = [];
 
-  constructor(public modalService: BsModalService) {}
+  constructor(public modalService: BsModalService, private route: ActivatedRoute, private examService: ExamService) {}
 
   ngOnInit() {
+    
+    this.route.paramMap.subscribe(params => {
+      this.examId = params.get('examId')!;
+      this.loadEvents();
+    });
+
     this.titleH3Text13ConfigProperties = {
       helpText: '',
       styles: {
@@ -32,7 +44,7 @@ export class AdminDetailedResultsComponent implements OnInit {
       propertyName: '41b86e8e-5cd2-44bc-8f0f-93c6de34fdc7',
       showLabel: false,
       type: 'title-h3-text',
-      value: 'Deatil Result',
+      value: 'Detailed Results',
       formControlName: 'titleH3Text13FormControl',
       navigateTo: '',
       customCssClasses: [],
@@ -48,7 +60,7 @@ export class AdminDetailedResultsComponent implements OnInit {
       styles: {
         componentStyle: '',
         datagridHeaderStyle: '',
-        datagridCellStyle: '',
+        datagridCellStyle: 'font-size-16 font-weight-400 color-000000',
         datagridPaginationStyle: '',
         datagridSearchButtonStyle:
           'height-30 padding-top-12 padding-bottom-12 padding-left-16 padding-right-16 background-color-fff border-radius-4 border-width-1 border-style-solid border-color-e0e0e0 color-000000 margin-right-10 margin-bottom-10',
@@ -63,41 +75,28 @@ export class AdminDetailedResultsComponent implements OnInit {
       propertyName: '0f697305-c14f-411d-80bd-85f4ea751eb2',
       showLabel: false,
       type: 'data-grid',
+      value: [
+        {
+          id: 0,
+          'Student Name': 'Bhushan',
+          Percentage: 90,
+          Status: 'Pass',
+          'Section Result': 'Show',
+        }
+      ],
+      // value: this.examresults.map((item: any, index: number) => ({
+      //   id: index,
+      //   'Student Name': item.name || `Name${index}`, // Default to "Name{index}" if name is missing
+      //   Percentage: item.percentage || 0,           // Default to 0 if percentage is missing
+      //   Status: item.resultStatus || 'Pending',     // Default to "Pending" if resultStatus is missing
+      //   'Section Result': item.resultLink || 'Show' // Default to "Show" if resultLink is missing
+      // })),
+      
       formControlName: 'dataGrid1FormControl',
       navigateTo: '',
       customCssClasses: [],
       childs: [],
       icon: 'faTable',
-      rowData: [
-        {
-          id: 0,
-          'Student Name': 'Name0',
-          Percentage: 1,
-          Status: 'Name0',
-          'Section Result': 'https://www.google.com',
-        },
-        {
-          id: 1,
-          'Student Name': 'Name1',
-          Percentage: 2,
-          Status: 'Name1',
-          'Section Result': 'https://www.google.com',
-        },
-        {
-          id: 2,
-          'Student Name': 'Name2',
-          Percentage: 3,
-          Status: 'Name2',
-          'Section Result': 'https://www.google.com',
-        },
-        {
-          id: 3,
-          'Student Name': 'Name3',
-          Percentage: 4,
-          Status: 'Name3',
-          'Section Result': 'https://www.google.com',
-        },
-      ],
       listChilds: [],
       styleType: '',
       variableName: 'dataGrid1ConfigProperties',
@@ -131,7 +130,7 @@ export class AdminDetailedResultsComponent implements OnInit {
           dropdownOptions: [],
           hidden: false,
           dateFormat: 'MMM d, yyyy hh:mm:ss',
-          alignment: 'center',
+          alignment: 'left',
           tooltip: false,
           onClick: { storeRowData: false, keyToStoredData: '', navigateTo: -1, apis: [] },
           customClass: '',
@@ -144,7 +143,7 @@ export class AdminDetailedResultsComponent implements OnInit {
           dropdownOptions: [],
           hidden: false,
           dateFormat: 'MMM d, yyyy hh:mm:ss',
-          alignment: 'center',
+          alignment: 'left',
           tooltip: false,
           onClick: { storeRowData: false, keyToStoredData: '', navigateTo: -1, apis: [] },
           customClass: '',
@@ -157,7 +156,7 @@ export class AdminDetailedResultsComponent implements OnInit {
           dropdownOptions: [],
           hidden: false,
           dateFormat: 'MMM d, yyyy hh:mm:ss',
-          alignment: 'center',
+          alignment: 'left',
           tooltip: false,
           onClick: { storeRowData: false, keyToStoredData: '', navigateTo: -1, apis: [] },
           customClass: '',
@@ -170,7 +169,7 @@ export class AdminDetailedResultsComponent implements OnInit {
           dropdownOptions: [],
           hidden: false,
           dateFormat: 'MMM d, yyyy hh:mm:ss',
-          alignment: 'center',
+          alignment: 'left',
           tooltip: false,
           onClick: { storeRowData: false, keyToStoredData: '', navigateTo: 1, apis: [] },
           customClass: '',
@@ -467,17 +466,42 @@ export class AdminDetailedResultsComponent implements OnInit {
       variableName: 'subtitleText11ConfigProperties',
       listOfOptions: [],
     };
+    console.log("Test the datagrid: "+JSON.stringify(this.dataGrid1ConfigProperties));    
+  }
+
+  private loadEvents(): void {
+    this.examService.GetExamResultsByExamId(this.examId).subscribe((response : any) => {
+      if (response) {
+        console.log('Fetched Exam Results Deatils:', response);
+        this.examresults = response.data;
+        
+        this.dataGrid1ConfigProperties.value = this.examresults.map((event: any, index: number) => ({
+          id: index, 
+          'Student Name': event.name || `Name${index}`, // Fallback to "Name{index}" if name is missing
+          Percentage: event.percentage || 0,           // Default to 0 if percentage is missing
+          Status: event.resultStatus || 'Pending',     // Default to "Pending" if resultStatus is missing
+          'Section Result': event.resultLink || 'Show' // Default to "Show" if resultLink is missing
+        }));
+  
+        // Optionally, log the updated value for debugging
+        console.log('Updated DataGrid Config:', this.dataGrid1ConfigProperties.value);
+      } else {
+        console.error('No data received from the API');
+      }
+    }, error => {
+      console.error('Error fetching exam results:', error);
+    });
   }
 
   dataGrid1gridRowChanged(event: any) {
-    this.dataGrid1ConfigProperties.rowData = [...event.rowData];
+    this.dataGrid1ConfigProperties.value = [...event.rowData];
   }
-  dataGrid1onDeleteRow(rowData: any) {
-    this.dataGrid1ConfigProperties.rowData = this.dataGrid1ConfigProperties.rowData.filter(
-      (row: any) => row.id !== rowData.id,
+  dataGrid1onDeleteRow(value: any) {
+    this.dataGrid1ConfigProperties.value = this.dataGrid1ConfigProperties.value.filter(
+      (row: any) => row.id !== value.id,
     );
   }
   dataGrid1saveBulkData(event: any) {
-    this.dataGrid1ConfigProperties.rowData = [...event.rowData];
+    this.dataGrid1ConfigProperties.value = [...event.rowData];
   }
 }

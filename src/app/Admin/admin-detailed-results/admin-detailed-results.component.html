@@ -8,7 +8,7 @@
           <data-grid
             [configData]="dataGrid1ConfigProperties"
             [gridIterfaceConfig]="dataGrid1InterfaceConfig"
-            [rowData]="dataGrid1ConfigProperties.rowData"
+            [rowData]="dataGrid1ConfigProperties.value"
             (rowChanged)="dataGrid1gridRowChanged($event)"
             (deleteRow)="dataGrid1onDeleteRow($event)"
             (saveBulkData)="dataGrid1saveBulkData($event)">

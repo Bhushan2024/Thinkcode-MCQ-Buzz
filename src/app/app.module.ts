@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TitleH3TextComponent } from './shared/components/title-h3-text/title-h3-text.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TextInputComponent } from './shared/components/text-input/text-input.component';
 import { EmailInputComponent } from './shared/components/email-input/email-input.component';
 import { PasswordInputComponent } from './shared/components/password-input/password-input.component';
@@ -15,9 +15,9 @@ import { ButtonComponent } from './shared/components/button-component/button-com
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AdminExamComponent } from './Admin/admin-exam/admin-exam.component';
-import { CardComponent } from './shared/components 1/card/card.component';
-import { SubtitleTextComponent } from './shared/components 1/subtitle-text/subtitle-text.component';
-import { BodyTextComponent } from './shared/components 1/body-text/body-text.component';
+import { CardComponent } from './shared/components/card/card.component';
+import { SubtitleTextComponent } from './shared/components/subtitle-text/subtitle-text.component';
+import { BodyTextComponent } from './shared/components/body-text/body-text.component';
 import { ProjectionTemplate } from './shared/utilities/commmon-utilities/commmon-utilities';
 import { AddExamComponent } from './Admin/add-exam/add-exam.component';
 import { TextareaComponent } from './shared/components/text-area/text-area.component';
@@ -38,6 +38,10 @@ import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard
 import { IconComponent } from './shared/components/icon/icon.component';
 import { LinkTextComponent } from './shared/components/link-text/link-text.component';
 import { AdminResultComponent } from './Admin/admin-result/admin-result.component';
+import { DataGridComponent } from './shared/components/data-grid/data-grid.component';
+import { DataGridSideDrawerComponent } from './shared/components/data-grid-side-drawer/data-grid-side-drawer.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { AdminDetailedResultsComponent } from './Admin/admin-detailed-results/admin-detailed-results.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,6 @@ import { AdminResultComponent } from './Admin/admin-result/admin-result.componen
     LoginComponent,
     AdminExamComponent,
     CardComponent,
-    SubtitleTextComponent,
     BodyTextComponent,
     AddExamComponent,
     TextareaComponent,
@@ -61,13 +64,11 @@ import { AdminResultComponent } from './Admin/admin-result/admin-result.componen
     CheckBoxComponent,
     AppComponent,
     AddExamComponent,
-    TitleH3TextComponent,
     TextInputComponent,
     TextareaComponent,
     DatepickerInputComponent,
     NumberInputComponent,
     CheckBoxComponent,
-    ButtonComponent,
     AddSectionComponent,
     AdminSectionComponent,
     PopupComponent,
@@ -76,7 +77,12 @@ import { AdminResultComponent } from './Admin/admin-result/admin-result.componen
     AdminDashboardComponent,
     IconComponent,
     LinkTextComponent,
-    AdminResultComponent
+    AdminResultComponent,
+    AdminDetailedResultsComponent,
+    DataGridComponent,
+    DataGridSideDrawerComponent,
+    SubtitleTextComponent,
+    AdminDetailedResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,8 +95,12 @@ import { AdminResultComponent } from './Admin/admin-result/admin-result.componen
     BsDatepickerModule.forRoot(),
     FontAwesomeModule,
     BrowserAnimationsModule,
+    CommonModule,
+    FormsModule,
+    AgGridModule,
+
   ],
-  providers: [
+  providers: [DatePipe,
     BsModalService,
     {
       provide: HTTP_INTERCEPTORS,
