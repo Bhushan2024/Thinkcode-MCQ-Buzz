@@ -29,7 +29,7 @@ export class StudentDashboardComponent implements OnInit {
       styles: {
         componentStyle: 'text-align-center',
         supportingTextStyle: 'color-6c757d',
-        headingTextStyle: 'color-black font-size-3rem font-weight-600 margin-top-6rem text-decoration-underline',
+        headingTextStyle: 'color-black mt-3',
       },
       isHidden: false,
       propertyName: '2315de9f-3983-4445-ab17-6f45ec39ef14',
@@ -120,7 +120,7 @@ export class StudentDashboardComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50 margin-left-5rem margin-right-5rem',
         cardBodyStyle:
-          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-1',
+          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-3',
       },
       isHidden: false,
       propertyName: 'd70c56c6-b5e9-4ca4-95d2-27e2ff522818',
@@ -401,7 +401,7 @@ export class StudentDashboardComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50 margin-left-5rem margin-right-5rem',
         cardBodyStyle:
-          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-1',
+          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-3',
       },
       isHidden: false,
       propertyName: 'fefdb633-b679-48a1-990c-94fe41dd8ae1',
@@ -682,7 +682,7 @@ export class StudentDashboardComponent implements OnInit {
         supportingTextStyle: 'color-6c757d',
         cardComponentStyle: 'height-50 margin-left-5rem margin-right-5rem',
         cardBodyStyle:
-          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-1',
+          'border-width-1 border-style-solid border-color-000000 border-radius-05rem box-shadow-0-20-25--5-rgb0-0-0--01-0-8-10--6-rgb0-0-0--01 p-3',
       },
       isHidden: false,
       propertyName: '3246050a-ad1d-4bdb-ab6b-8c7726275af5',
