@@ -31,7 +31,7 @@ export class WelcomeComponent implements OnInit {
       styles: {
         componentStyle: '',
         supportingTextStyle: 'color-6c757d',
-        headingTextStyle: 'color-black',
+        headingTextStyle: 'color-black text-center mb-3',
       },
       isHidden: false,
       propertyName: 'fb178bea-27a4-4b2b-9e0c-690ca39f9b78',
@@ -258,7 +258,7 @@ export class WelcomeComponent implements OnInit {
         componentStyle: 'padding-top-2-percent',
         supportingTextStyle: 'color-6c757d',
         buttonStyle:
-          'border-radius-4 border-width-1 padding-top-1-percent padding-bottom-1-percent width-100-percent background-color-rgb74-21-72-1 font-size-16 font-family-inherit font-weight-400 color-rgb255-255-255-1',
+          'border-radius-4 border-width-1 padding-top-1-percent padding-bottom-1-percent width-100-percent background-color-rgb74-21-72-1 font-size-16 font-family-inherit font-weight-400 color-rgb255-255-255-1 mb-3',
       },
       isHidden: false,
       propertyName: 'aa88a93d-eff3-48e8-836b-83852a790723',

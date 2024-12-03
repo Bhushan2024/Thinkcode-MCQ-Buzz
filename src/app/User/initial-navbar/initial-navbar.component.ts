@@ -282,5 +282,6 @@ export class InitialNavbarComponent implements OnInit {
   button13submitForm() {
     localStorage.clear();
     sessionStorage.clear();
+    window.location.reload();
   }
 }
