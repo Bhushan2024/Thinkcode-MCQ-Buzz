@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'; 
 
@@ -48,5 +48,17 @@ export class ExamService {
     const url = this.buildUrl('v1/Exam/GetExamDataByUserId');
     return this.http.post(url, JSON.stringify(teacherId), { headers: this.getHeaders() });
   }
+  addQuestionWithOptions(QuestionData: any): Observable<any> {
+    const url = this.buildUrl('v1/Question/addQuestionWithOptions');
+    return this.http.post(url, JSON.stringify(QuestionData), { headers: this.getHeaders() });
+  }
+  addQuestionWithOptions2(QuestionData: any): Observable<HttpResponse<any>> {
+    const url = this.buildUrl('v1/Question/addQuestionWithOptions');
+    return this.http.post<any>(url, JSON.stringify(QuestionData), { headers: this.getHeaders() });
+  }
+  // addQuestionWithOptions(payload: any): Observable<HttpResponse<any>> {
+  //   // Observe the full HTTP response
+  //   return this.http.post<any>(this.apiUrl, payload, { observe: 'response' });
+  // }
   
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ExamService } from 'src/app/Service/exam.service';
 import { response } from 'express';
+import { ToastService } from 'src/app/Service/toast.service';
 
 
 
@@ -73,7 +74,9 @@ export class AdminSectionComponent implements OnInit {
   public bodyText11ConfigProperties: any;
 
   constructor(public modalService: BsModalService,
-    private apiService: Client, private route: ActivatedRoute, private examService: ExamService
+    private apiService: Client, private route: ActivatedRoute, private examService: ExamService,
+    private router: Router,
+    private toastService: ToastService
   ) {
   }
 
@@ -161,12 +164,16 @@ export class AdminSectionComponent implements OnInit {
 
     this.popup2ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "headingTextStyle": "color-black", "iconStyle": "color-black", "popupStyle": "background-color-fff border-radius-4 border-width-1 border-style-solid border-color-e0e0e0 padding-top-12 padding-bottom-12 padding-left-16 padding-right-16 color-000000 position-relative", "popupHeaderStyle": "", "popupBodyStyle": "" }, "isHidden": false, "propertyName": "5433ab3b-a8a5-46c1-870e-bb6f61f29b9c", "showLabel": false, "type": "popup", "value": "default", "formControlName": "popup2FormControl", "navigateTo": "", "customCssClasses": [], "childs": [{ "componentId": 16, "componentName": "Subtitle Text11", "listChilds": [], "styleType": "", "mobileFloatAlignment": "", "childs": [], "icon": "faText", "componentType": "Text", "showLabel": false, "propertyName": "4165d981-d4ff-476a-bef4-baa6652112cb", "newProperty": true, "hasChildEntity": false, "hasPlaceholder": false, "type": "subtitle-text", "sortOrder": 210, "value": "Question No. Question Text", "isActive": false, "customCssClasses": [], "note": "", "isHidden": false, "isImplemented": true, "styles": {}, "labelStyles": {}, "helpText": "", "navigateTo": "", "listOfOptions": [], "customStyles": [{ "styleId": 1, "styleType": "component-styles", "styleObj": {}, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 4, "styleType": "supporting-text-styles", "styleObj": { "color": "#6c757d" }, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 16, "styleType": "subtitle-text-styles", "styleObj": { "color": "black" }, "customCssClasses": [], "flexAlignmentClasses": [] }], "customStyleTypeOptions": ["component-styles", "subtitle-text-styles", "supporting-text-styles"], "allowApiConfiguration": false, "formControlName": "", "templatePropertyId": 1, "isDataStoredInSession": false, "fieldStorageKeyValue": "", "mapValuesFromProperty": "", "index": 0 }, { "componentId": 17, "componentName": "Body Text11", "listChilds": [], "styleType": "", "mobileFloatAlignment": "", "childs": [], "icon": "faBold", "componentType": "Text", "showLabel": false, "propertyName": "999b41cb-1360-4333-a553-15ddd7c73dee", "newProperty": true, "hasChildEntity": false, "hasPlaceholder": false, "type": "body-text", "sortOrder": 220, "value": "Option_1", "isActive": false, "customCssClasses": [], "note": "", "isHidden": false, "isImplemented": true, "styles": {}, "labelStyles": {}, "helpText": "", "navigateTo": "", "listOfOptions": [], "customStyles": [{ "styleId": 1, "styleType": "component-styles", "styleObj": {}, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 4, "styleType": "supporting-text-styles", "styleObj": { "color": "#6c757d" }, "customCssClasses": [], "flexAlignmentClasses": [] }, { "styleId": 9, "styleType": "body-text-styles", "styleObj": { "color": "black" }, "customCssClasses": [], "flexAlignmentClasses": [] }], "customStyleTypeOptions": ["component-styles", "body-text-styles", "supporting-text-styles"], "allowApiConfiguration": false, "formControlName": "", "templatePropertyId": 2, "isDataStoredInSession": false, "fieldStorageKeyValue": "", "mapValuesFromProperty": "", "index": 1 }], "icon": "faClone", "listChilds": [], "styleType": "", "variableName": "popup2ConfigProperties", "listOfOptions": [], "modalTitle": "Question" };
 
-    this.subtitleText11ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "subtitleTextStyle": "color-black" }, "isHidden": false, "propertyName": "4165d981-d4ff-476a-bef4-baa6652112cb", "showLabel": false, "type": "subtitle-text", 
-    "value": "Question No. Question Text", 
-    "formControlName": "subtitleText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faText", "listChilds": [], "styleType": "", "variableName": "subtitleText11ConfigProperties", "listOfOptions": [] };
-    this.bodyText11ConfigProperties = { "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "bodyTextStyle": "color-black" }, "isHidden": false, "propertyName": "999b41cb-1360-4333-a553-15ddd7c73dee", "showLabel": false, "type": "body-text", 
-    "value": "Option_1", 
-    "formControlName": "bodyText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faBold", "listChilds": [], "styleType": "", "variableName": "bodyText11ConfigProperties", "listOfOptions": [] };
+    this.subtitleText11ConfigProperties = {
+      "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "subtitleTextStyle": "color-black" }, "isHidden": false, "propertyName": "4165d981-d4ff-476a-bef4-baa6652112cb", "showLabel": false, "type": "subtitle-text",
+      "value": "Question No. Question Text",
+      "formControlName": "subtitleText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faText", "listChilds": [], "styleType": "", "variableName": "subtitleText11ConfigProperties", "listOfOptions": []
+    };
+    this.bodyText11ConfigProperties = {
+      "helpText": "", "styles": { "componentStyle": "", "supportingTextStyle": "color-6c757d", "bodyTextStyle": "color-black" }, "isHidden": false, "propertyName": "999b41cb-1360-4333-a553-15ddd7c73dee", "showLabel": false, "type": "body-text",
+      "value": "Option_1",
+      "formControlName": "bodyText11FormControl", "navigateTo": "", "customCssClasses": [], "childs": [], "icon": "faBold", "listChilds": [], "styleType": "", "variableName": "bodyText11ConfigProperties", "listOfOptions": []
+    };
 
     let reqBody = new QuestionDto(); reqBody.questionText = this.text81ConfigProperties.value;
     reqBody.isMedia = this.checkBox21ConfigProperties.value;
@@ -201,26 +208,26 @@ export class AdminSectionComponent implements OnInit {
             ...this.subtitleText11ConfigProperties,
             value: `Q${index + 1}. ${item.questionText || 'Default Question Title'}`,
           };
-        
+
           const optionsConfig = item.options.map((option: any, optIndex: number) => ({
             ...this.bodyText11ConfigProperties,
             value: `Option${optIndex + 1}. ${option.optionText}[${option.isCorrect ? 'Correct' : 'Incorrect'}] Marks:${option.marks}`,
           }));
-        
+
           return {
             id: item.questionId,
             questionTitleConfig,
             optionsConfig,
           };
         });
-        
-        console.log("New Question Data", this.questionConfig); 
+
+        console.log("New Question Data", this.questionConfig);
       },
       (error) => {
         console.error('Error:', error);
       }
-      
-      
+
+
     );
     const classes = this.popup2ConfigProperties.value + ' ' + 'modal-dialog-centered';
     this.popup2BsModalRef = this.modalService.show(PopupComponent, {
@@ -322,7 +329,7 @@ export class AdminSectionComponent implements OnInit {
       questionText: this.text81ConfigProperties.value,
       isMedia: (this.checkBox21ConfigProperties.value == '') ? false : this.checkBox21ConfigProperties.value,
       mediaType: (this.dropdowns11ConfigProperties.value == null) ? 'No Media' : this.dropdowns11ConfigProperties.value,
-      mediaUrl: (this.text103ConfigProperties.value == "") ? 'No Link' : this.text103ConfigProperties.value,
+      mediaUrl: (this.text103ConfigProperties.value == '') ? 'No Link' : this.text103ConfigProperties.value,
       isMultipleChoice: (this.checkBox43ConfigProperties.value == '') ? false : this.checkBox43ConfigProperties.value,
       isFromQuestionBank: false,
       questionMaxMarks: this.number81ConfigProperties.value,
@@ -334,16 +341,42 @@ export class AdminSectionComponent implements OnInit {
         { optionText: this.text147ConfigProperties.value, isCorrect: (this.checkBox87ConfigProperties.value == '') ? false : this.checkBox87ConfigProperties.value, marks: this.number125ConfigProperties.value }
       ]
     };
-    console.log("Payload for question" + payload)
 
-    this.apiService.addQuestionWithOptions(payload).subscribe(
-      (response) => {
-        console.log('Success:', response);
+    // this.examService.addQuestionWithOptions(payload).subscribe(
+    //   (response) => {
+    //     if (response.status == 201) {
+    //       console.log('Success:', response);
+    //       this.toastService.showSuccess('Question Added Successfully');
+    //       window.location.reload();
+    //       this.router.navigate(['/admin-section', this.examId]);
+    //     } else {
+    //       this.toastService.showError('Error while Adding Question 1');
+    //     }
+    //   },
+    //   (error)=>{
+    //     if (error.status != 201) {
+    //       this.toastService.showError('Error while Adding Question 2');
+    //     }
+    //   }
+    // );
+
+    this.examService.addQuestionWithOptions2(payload).subscribe({
+      next: (response) => {
+        if (response.status === 201) {
+          console.log('Response Body:', response);
+          window.location.reload();
+          this.toastService.showSuccess('Question Added Successfully');
+          this.router.navigate(['/admin-section', this.examId]);
+        } else {
+          console.warn('Unexpected Response:', response);
+          this.toastService.showError('Unexpected response from the server.');
+        }
       },
-      (error) => {
+      error: (error) => {
         console.error('Error:', error);
-      }
-    );
+        this.toastService.showError('Error while adding question.');
+      },
+    });
   }
 
 }

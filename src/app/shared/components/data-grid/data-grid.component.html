@@ -1,0 +1,78 @@
+<div
+  [ngClass]="[configData.styles.componentStyle ? configData.styles.componentStyle : '']"
+  [hidden]="configData.isHidden">
+  <div>
+    <div *ngIf="gridIterfaceConfig?.isTableSearchable">
+      <input
+        [ngClass]="[
+          configData.styles.datagridSearchButtonStyle
+            ? configData.styles.datagridSearchButtonStyle
+            : '',
+        ]"
+        [id]="configData.propertyName"
+        [(ngModel)]="searchTerm"
+        placeholder="Search..."
+        (input)="onFilterTextBoxChanged()"
+        onkeydown="return(event.keyCode != 13)" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-lg-8">
+      <button
+        [ngClass]="[
+          configData.styles.datagridBulkSaveButtonStyle
+            ? configData.styles.datagridBulkSaveButtonStyle
+            : '',
+        ]"
+        *ngIf="gridIterfaceConfig?.isBulkAddEnabled || gridIterfaceConfig?.isBulkEditEnabled"
+        (click)="saveRowData($event)">
+        <fa-icon [icon]="faFloppyDisk"> </fa-icon>
+        Save
+      </button>
+      <button
+        [ngClass]="[
+          configData.styles.datagridExportButtonStyle
+            ? configData.styles.datagridExportButtonStyle
+            : '',
+        ]"
+        *ngIf="gridIterfaceConfig?.isExportToCSVEnabled"
+        (click)="onBtnExport()">
+        <fa-icon [icon]="faFileCsv"> </fa-icon>
+        Export
+      </button>
+      <button
+        [ngClass]="[
+          configData.styles.datagridNewRowButtonStyle
+            ? configData.styles.datagridNewRowButtonStyle
+            : '',
+        ]"
+        *ngIf="
+          gridIterfaceConfig?.isRowAddable &&
+          (!gridIterfaceConfig?.addNewRowBtnStyle?.position ||
+            gridIterfaceConfig?.addNewRowBtnStyle?.position === 'top')
+        "
+        (click)="onClickAddRow()">
+        <fa-icon [icon]="faPlus" class=""> </fa-icon>
+        {{ gridIterfaceConfig?.addBtnLabel ?? 'New Row' }}
+      </button>
+    </div>
+  </div>
+  <ag-grid-angular
+    [ngClass]="[configData.styles.datagridStyle ? configData.styles.datagridStyle : '', themeClass]"
+    [rowData]="gridRowData"
+    [columnDefs]="colDefs"
+    [defaultColDef]="defaultColDef"
+    (gridReady)="onGridReady($event)"
+    [debounceVerticalScrollbar]="!isPaginationEnabled"
+    [pagination]="isPaginationEnabled"
+    [paginationPageSize]="paginationPageSize"
+    [editType]="editType"
+    (rowValueChanged)="onRowValueChanged($event)"
+    (cellValueChanged)="onCellValueChanged($event)"
+    [singleClickEdit]="bulkEdit"
+    rowSelection="multiple"
+    [suppressDragLeaveHidesColumns]="true"
+    (rowClicked)="onRowClicked($event)"
+    [suppressClickEdit]="allowOpeningDrawer">
+  </ag-grid-angular>
+</div>

@@ -1,0 +1,25 @@
+<div
+  class="background-image background-color-ffffff background-image-none background-repeat-no-repeat background-size-width-100-percent background-size-height-100-percent flex-direction-column align-items-flex-start justify-content-flex-start font-family-inherit container-fluid">
+  <div class="row">
+    <div class="col-lg-12 color-black">
+      <title-h3-text [configProperties]="titleH3Text13ConfigProperties"></title-h3-text>
+      <div class="row">
+        <div class="col-lg-12 color-black">
+          <data-grid
+            [configData]="dataGrid1ConfigProperties"
+            [gridIterfaceConfig]="dataGrid1InterfaceConfig"
+            [rowData]="dataGrid1ConfigProperties.rowData"
+            (rowChanged)="dataGrid1gridRowChanged($event)"
+            (deleteRow)="dataGrid1onDeleteRow($event)"
+            (saveBulkData)="dataGrid1saveBulkData($event)">
+          </data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #detailedResultsTemplate
+    ><subtitle-text [configProperties]="subtitleText110ConfigProperties"></subtitle-text
+    ><subtitle-text [configProperties]="subtitleText112ConfigProperties"></subtitle-text
+    ><subtitle-text [configProperties]="subtitleText11ConfigProperties"></subtitle-text
+  ></ng-template>
+</div>
