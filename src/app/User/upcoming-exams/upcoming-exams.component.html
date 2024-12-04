@@ -9,8 +9,9 @@
         <div class="col-lg-10 color-black">
           <title-h3-text [configProperties]="titleH3Text12ConfigProperties"></title-h3-text
           >
-          <div class="col-lg-4 color-black d-flex">
-          <card *ngFor="let cardConfig of cardsConfigProperties" [configProperties]="cardConfig.card1ConfigProperties" (cardClickedEvent)="card1Clicked()"
+          <div class="row">
+          <div class="col-lg-4 color-black " *ngFor="let cardConfig of cardsConfigProperties">
+          <card [configProperties]="cardConfig.card1ConfigProperties" (cardClickedEvent)="card1Clicked()"
            ><ng-template pTemplate="content"
               ><subtitle-text [configProperties]="cardConfig.subtitleText45ConfigProperties"></subtitle-text
               ><supporting-text
@@ -54,6 +55,7 @@
                 (submitForm)="button1submitForm(cardConfig.button1ConfigProperties.propertyName)"></button-component></ng-template
           ></card>
           </div>
+        </div>
         </div>
       </div>
     </div>
